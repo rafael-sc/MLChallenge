@@ -1,4 +1,4 @@
-package com.orafaelmesmo.mlchallenge.presentation.theme
+package com.orafaelmesmo.mlchallenge.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

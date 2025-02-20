@@ -7,21 +7,20 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface ApiService {
-
+interface ProductApi {
     /**
-    https://api.mercadolibre.com/sites/MLB/search?q=iphone
+     https://api.mercadolibre.com/sites/MLB/search?q=iphone
      */
     @GET("sites/MLB/search")
     suspend fun searchProducts(
-        @Query("q") query: String
+        @Query("q") query: String,
     ): Response<SearchResponse>
 
     /**
-    https://api.mercadolibre.com/items/MLA123456
+     https://api.mercadolibre.com/items/MLA123456
      */
     @GET("products/{id}")
     suspend fun getProductDetails(
-        @Path("id") id: String
+        @Path("id") id: String,
     ): Response<ProductRemote>
 }

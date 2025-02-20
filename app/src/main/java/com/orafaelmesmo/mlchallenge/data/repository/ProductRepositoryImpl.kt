@@ -1,15 +1,12 @@
 package com.orafaelmesmo.mlchallenge.data.repository
 
 import com.orafaelmesmo.mlchallenge.data.mapper.ProductMapper
-import com.orafaelmesmo.mlchallenge.data.remote.ApiService
-import com.orafaelmesmo.mlchallenge.domain.Product
-
-
+import com.orafaelmesmo.mlchallenge.data.remote.ProductApi
+import com.orafaelmesmo.mlchallenge.domain.model.Product
 
 class ProductRepositoryImpl(
-    private val apiService: ApiService
+    private val apiService: ProductApi,
 ) : ProductRepository {
-
     override suspend fun searchProducts(query: String): List<Product> {
         val response = apiService.searchProducts(query)
         if (response.isSuccessful) {

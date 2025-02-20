@@ -11,30 +11,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.orafaelmesmo.mlchallenge.data.remote.RetrofitClient
-import com.orafaelmesmo.mlchallenge.data.repository.ProductRepositoryImpl
-import com.orafaelmesmo.mlchallenge.domain.SearchProductsUseCase
-import com.orafaelmesmo.mlchallenge.presentation.theme.MLChallengeTheme
 import com.orafaelmesmo.mlchallenge.presentation.viewmodel.SearchViewModel
+import com.orafaelmesmo.mlchallenge.ui.theme.MLChallengeTheme
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
-    val searchViewModel = SearchViewModel(
-        searchProductsUseCase = SearchProductsUseCase(
-            repository = ProductRepositoryImpl(
-                apiService = RetrofitClient.apiService
-            )
-        )
-    )
+    private val searchViewModel: SearchViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        searchViewModel.search("power ball vermelha")
         enableEdgeToEdge()
         setContent {
             MLChallengeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier.padding(innerPadding),
                     )
                 }
             }
@@ -43,10 +36,13 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(
+    name: String,
+    modifier: Modifier = Modifier,
+) {
     Text(
         text = "Hello $name!",
-        modifier = modifier
+        modifier = modifier,
     )
 }
 
