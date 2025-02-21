@@ -1,20 +1,27 @@
 package com.orafaelmesmo.mlchallenge.data.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import com.orafaelmesmo.mlchallenge.data.mapper.ProductMapper
 import com.orafaelmesmo.mlchallenge.data.remote.ProductApi
 import com.orafaelmesmo.mlchallenge.domain.model.Product
+import kotlinx.coroutines.flow.Flow
 
 class ProductRepositoryImpl(
     private val apiService: ProductApi,
 ) : ProductRepository {
-    override suspend fun searchProducts(query: String): List<Product> {
-        val response = apiService.searchProducts(query)
-        if (response.isSuccessful) {
-            val searchResponse = response.body() ?: throw Exception("Empty response")
-            return searchResponse.results.map { ProductMapper.toDomain(it) }
-        } else {
-            throw Exception("Error searching producs: ${response.errorBody()?.string()}")
-        }
+
+    override fun searchProducts(query: String): Flow<PagingData<Product>> {
+        return Pager(
+            PagingConfig(
+                pageSize = 50,
+                initialLoadSize = 50,
+                prefetchDistance = 10
+            )
+        ) {
+            ProductPagingSource(apiService, query)
+        }.flow
     }
 
     override suspend fun getProductDetails(id: String): Product {

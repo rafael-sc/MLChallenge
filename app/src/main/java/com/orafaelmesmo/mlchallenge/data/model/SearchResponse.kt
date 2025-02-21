@@ -9,7 +9,7 @@ data class SearchResponse(
     val countryDefaultTimeZone: String,
     val query: String,
     val paging: Paging,
-    val results: List<ProductRemote>
+    val results: List<ProductRemote>,
 )
 
 data class Paging(
@@ -17,5 +17,5 @@ data class Paging(
     @Json(name = "primary_results")
     val primaryResults: Int,
     val offset: Int,
-    val limit: Int
+    val limit: Int,
 )

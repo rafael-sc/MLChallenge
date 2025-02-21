@@ -7,7 +7,7 @@ object ProductMapper {
     fun toDomain(productRemote: ProductRemote): Product {
         return Product(
             id = productRemote.id,
-            name = productRemote.name,
+            name = productRemote.title,
             price = productRemote.price,
             thumbnail = productRemote.thumbnail,
         )
