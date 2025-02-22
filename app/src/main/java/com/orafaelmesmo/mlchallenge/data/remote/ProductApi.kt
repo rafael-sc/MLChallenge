@@ -15,7 +15,7 @@ interface ProductApi {
     suspend fun searchProducts(
         @Query("q") query: String,
         @Query("offset") offset: Int,
-        @Query("limit") limit: Int
+        @Query("limit") limit: Int,
     ): Response<SearchResponse>
 
     /**

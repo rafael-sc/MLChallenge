@@ -26,7 +26,7 @@ private val LightColorScheme =
     )
 private val DarkColorScheme =
     darkColorScheme(
-        primary = Color(0xFF191919), // Preto
+        primary = Color(0xFF191919),
         secondary = Color(0xFF6E6E6E),
         tertiary = Color(0xFF008040),
         background = Color(0xFF121212),
@@ -38,6 +38,7 @@ private val DarkColorScheme =
         onSurface = Color.White,
     )
 
+@Suppress("FunctionName")
 @Composable
 fun MLChallengeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),

@@ -11,7 +11,6 @@ class ProductPagingSource(
     private val productApi: ProductApi,
     private val query: String,
 ) : PagingSource<Int, Product>() {
-
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> {
         val currentOffset = params.key ?: STARTING_OFFSET
         return try {
@@ -28,7 +27,7 @@ class ProductPagingSource(
                 LoadResult.Page(
                     data = products,
                     prevKey = if (currentOffset == 0) null else currentOffset - params.loadSize,
-                    nextKey = nextKey
+                    nextKey = nextKey,
                 )
             } else {
                 Log.e(TAG, "Empty response body")
@@ -36,8 +35,8 @@ class ProductPagingSource(
                     Exception(
                         "Error searching products: ${
                             response.errorBody()?.string()
-                        }"
-                    )
+                        }",
+                    ),
                 )
             }
         } catch (e: Exception) {

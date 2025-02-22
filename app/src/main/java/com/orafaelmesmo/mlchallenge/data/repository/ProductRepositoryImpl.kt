@@ -11,14 +11,13 @@ import kotlinx.coroutines.flow.Flow
 class ProductRepositoryImpl(
     private val apiService: ProductApi,
 ) : ProductRepository {
-
     override fun searchProducts(query: String): Flow<PagingData<Product>> {
         return Pager(
             PagingConfig(
                 pageSize = 50,
                 initialLoadSize = 50,
-                prefetchDistance = 10
-            )
+                prefetchDistance = 10,
+            ),
         ) {
             ProductPagingSource(apiService, query)
         }.flow

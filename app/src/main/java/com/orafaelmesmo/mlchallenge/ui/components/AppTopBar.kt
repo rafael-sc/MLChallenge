@@ -14,30 +14,32 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
+@Suppress("FunctionName")
 @Composable
 fun AppTopBar(
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior,
     onTextFieldValueChange: (String) -> Unit = {},
 ) {
-
     var textFieldValue by rememberSaveable { mutableStateOf("") }
 
     TopAppBar(
-        modifier = modifier
-            .padding(horizontal = 16.dp)
-            .clip(RoundedCornerShape(100.dp)),
+        modifier =
+            modifier
+                .padding(horizontal = 16.dp)
+                .clip(RoundedCornerShape(100.dp)),
         scrollBehavior = scrollBehavior,
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(),
-        ),
+        colors =
+            TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(),
+            ),
         windowInsets = WindowInsets(top = 0.dp),
         title = {
             TextField(
@@ -48,7 +50,7 @@ fun AppTopBar(
                     onTextFieldValueChange(newValue)
                 },
                 label = { Text("Search product") },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             )
         },
     )

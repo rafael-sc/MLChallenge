@@ -25,18 +25,18 @@ import com.orafaelmesmo.mlchallenge.ui.components.AppTopBar
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
+@Suppress("FunctionName")
 @Composable
-fun ProductListScreen(
-    modifier: Modifier = Modifier,
-
-    ) {
+fun ProductListScreen(modifier: Modifier = Modifier) {
     val viewModel: SearchViewModel = koinViewModel()
-    val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior(
-        state = rememberTopAppBarState()
-    )
+    val scrollBehavior =
+        TopAppBarDefaults.enterAlwaysScrollBehavior(
+            state = rememberTopAppBarState(),
+        )
     Scaffold(
-        modifier = modifier
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier =
+            modifier
+                .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             AppTopBar(
                 scrollBehavior = scrollBehavior,
@@ -47,18 +47,17 @@ fun ProductListScreen(
     ) { paddingValues ->
         SearchContent(
             paddingValues = paddingValues,
-            viewModel = viewModel
+            viewModel = viewModel,
         )
     }
 }
 
+@Suppress("FunctionName")
 @Composable
 fun SearchContent(
     paddingValues: PaddingValues,
-    viewModel: SearchViewModel
+    viewModel: SearchViewModel,
 ) {
-
-
     val lazyListState = rememberLazyListState()
 
     val productsPagingItems = viewModel.productsPagingData.collectAsLazyPagingItems()
@@ -66,22 +65,24 @@ fun SearchContent(
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
-        contentPadding = PaddingValues(
-            top = paddingValues.calculateTopPadding() + 16.dp,
-        ),
-        state = lazyListState
+        contentPadding =
+            PaddingValues(
+                top = paddingValues.calculateTopPadding() + 16.dp,
+            ),
+        state = lazyListState,
     ) {
         items(
             count = productsPagingItems.itemCount,
             key = { index ->
                 productsPagingItems[index]?.id ?: index
-            }
+            },
         ) { index ->
             Text(
                 text = productsPagingItems[index]?.name ?: "Name not found",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
+                modifier =
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
             )
         }
 
@@ -90,10 +91,11 @@ fun SearchContent(
                 loadState.refresh is LoadState.Loading -> {
                     item {
                         CircularProgressIndicator(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
-                                .wrapContentWidth(Alignment.CenterHorizontally)
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp)
+                                    .wrapContentWidth(Alignment.CenterHorizontally),
                         )
                     }
                 }
@@ -101,10 +103,11 @@ fun SearchContent(
                 loadState.append is LoadState.Loading -> {
                     item {
                         CircularProgressIndicator(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
-                                .wrapContentWidth(Alignment.CenterHorizontally)
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp)
+                                    .wrapContentWidth(Alignment.CenterHorizontally),
                         )
                     }
                 }
@@ -114,9 +117,10 @@ fun SearchContent(
                     item {
                         Text(
                             text = "Error Loading Product: ${e.error.localizedMessage}",
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
                         )
                     }
                 }
@@ -125,9 +129,10 @@ fun SearchContent(
                     item {
                         Text(
                             text = "Erro ao carregar mais produtos: ${e.error.localizedMessage}",
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
                         )
                     }
                 }
