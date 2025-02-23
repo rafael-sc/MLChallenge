@@ -4,8 +4,10 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.orafaelmesmo.mlchallenge.data.mapper.ProductMapper
+import com.orafaelmesmo.mlchallenge.data.model.ProductRemote
 import com.orafaelmesmo.mlchallenge.data.remote.ProductApi
 import com.orafaelmesmo.mlchallenge.domain.model.Product
+import java.net.URL
 
 class ProductPagingSource(
     private val productApi: ProductApi,
@@ -21,7 +23,9 @@ class ProductPagingSource(
                 Log.i(TAG, "Product Load successful $response")
 
                 val searchResponse = response.body() ?: throw Exception("Empty response")
-                val products = searchResponse.results.map { ProductMapper.toDomain(it) }
+                val products = searchResponse.results
+                    .filter { isValidProduct(it) }
+                    .map { ProductMapper.toDomain(it) }
 
                 val nextKey = if (products.isEmpty()) null else currentOffset + params.loadSize
                 LoadResult.Page(
@@ -45,6 +49,13 @@ class ProductPagingSource(
         }
     }
 
+    private fun isValidProduct(productRemote: ProductRemote): Boolean {
+        return productRemote.id.isNotEmpty() &&
+                productRemote.title.isNotEmpty() &&
+                productRemote.price > 0 &&
+                isValidUrl(productRemote.thumbnail)
+    }
+
     override fun getRefreshKey(state: PagingState<Int, Product>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(state.config.pageSize)
@@ -55,5 +66,14 @@ class ProductPagingSource(
     private companion object {
         const val STARTING_OFFSET = 0
         const val TAG = "ProductPagingSource"
+    }
+
+    private fun isValidUrl(url : String): Boolean {
+        return try {
+            URL(url).toURI()
+            true
+        } catch (e: Exception) {
+            false
+        }
     }
 }
