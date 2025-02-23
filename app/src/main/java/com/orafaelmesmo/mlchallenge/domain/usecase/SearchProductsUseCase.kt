@@ -5,5 +5,5 @@ import com.orafaelmesmo.mlchallenge.domain.model.Product
 import kotlinx.coroutines.flow.Flow
 
 interface SearchProductsUseCase {
-    fun searchProducts(query: String): Flow<PagingData<Product>>
+    suspend fun searchProducts(query: String): Flow<PagingData<Product>>
 }

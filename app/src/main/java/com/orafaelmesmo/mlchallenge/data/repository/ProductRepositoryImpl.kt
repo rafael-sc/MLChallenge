@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 class ProductRepositoryImpl(
     private val apiService: ProductApi,
 ) : ProductRepository {
-    override fun searchProducts(query: String): Flow<PagingData<Product>> {
+    override suspend fun searchProducts(query: String): Flow<PagingData<Product>> {
         return Pager(
             PagingConfig(
                 pageSize = 50,
