@@ -8,8 +8,8 @@ object ProductMapper {
         return Product(
             id = productRemote.id,
             name = productRemote.title,
-            price = productRemote.price,
-            thumbnail = productRemote.thumbnail,
+            price = "${productRemote.price}",
+            thumbnail = productRemote.thumbnail.replace("http://", "https://"),
         )
     }
 }
