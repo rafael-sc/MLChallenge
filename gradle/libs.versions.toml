@@ -1,5 +1,6 @@
 [versions]
 agp = "8.7.3"
+coilCompose = "3.1.0"
 converterMoshi = "2.9.0"
 kotlin = "2.0.20"
 coreKtx = "1.15.0"
@@ -14,12 +15,15 @@ retrofit = "2.9.0"
 ktlint = "12.1.2"
 detekt = "1.23.7"
 koinVersion = "3.5.3"
+volley = "1.2.1"
 
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingVersion" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilCompose" }
 converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "converterMoshi" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -39,6 +43,7 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinVers
 koin-androidx-compose = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koinVersion" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinVersion" }
 androidx-paging-common-android = { group = "androidx.paging", name = "paging-common-android", version.ref = "pagingVersion" }
+volley = { group = "com.android.volley", name = "volley", version.ref = "volley" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
