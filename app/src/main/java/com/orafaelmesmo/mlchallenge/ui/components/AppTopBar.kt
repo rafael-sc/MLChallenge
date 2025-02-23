@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+@Suppress("FunctionName")
 fun AppTopBar(
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior,
@@ -41,26 +42,26 @@ fun AppTopBar(
 
     TopAppBar(
         modifier =
-        modifier
-            .padding(horizontal = 16.dp)
-            .clip(RoundedCornerShape(100.dp)),
+            modifier
+                .padding(horizontal = 16.dp)
+                .clip(RoundedCornerShape(100.dp)),
         scrollBehavior = scrollBehavior,
         colors =
-        TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.9f), // Fundo semi-transparente
-        ),
+            TopAppBarDefaults.topAppBarColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.9f),
+            ),
         windowInsets = WindowInsets(top = 0.dp),
         title = {
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.Center,
             ) {
                 Icon(
                     imageVector = Icons.Default.Search,
                     contentDescription = "Search",
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.padding(end = 8.dp)
+                    modifier = Modifier.padding(end = 8.dp),
                 )
 
                 TextField(
@@ -72,33 +73,33 @@ fun AppTopBar(
                     label = { Text("Search product") },
                     singleLine = true,
                     colors =
-                    TextFieldDefaults.colors(
-                        focusedContainerColor = Color.Transparent,
-                        unfocusedContainerColor = Color.Transparent,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        disabledIndicatorColor = Color.Transparent
-                    ),
+                        TextFieldDefaults.colors(
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            disabledIndicatorColor = Color.Transparent,
+                        ),
                     modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
+                        Modifier
+                            .fillMaxWidth()
+                            .weight(1f),
                     shape = RoundedCornerShape(100.dp),
                     trailingIcon = {
                         if (textFieldValue.isNotEmpty()) {
                             IconButton(
-                                onClick = { textFieldValue = "" }
+                                onClick = { textFieldValue = "" },
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Close,
                                     contentDescription = "Clear",
-                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
                             }
                         }
-                    }
+                    },
                 )
             }
-        }
+        },
     )
 }

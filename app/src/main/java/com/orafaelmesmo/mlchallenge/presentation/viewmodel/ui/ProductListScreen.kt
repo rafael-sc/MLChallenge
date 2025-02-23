@@ -36,8 +36,8 @@ fun ProductListScreen(modifier: Modifier = Modifier) {
         )
     Scaffold(
         modifier =
-        modifier
-            .nestedScroll(scrollBehavior.nestedScrollConnection),
+            modifier
+                .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             AppTopBar(
                 scrollBehavior = scrollBehavior,
@@ -66,9 +66,9 @@ fun SearchContent(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         contentPadding =
-        PaddingValues(
-            top = paddingValues.calculateTopPadding() + 16.dp,
-        ),
+            PaddingValues(
+                top = paddingValues.calculateTopPadding() + 16.dp,
+            ),
         state = lazyListState,
     ) {
         items(
@@ -80,12 +80,13 @@ fun SearchContent(
             val product = productsPagingItems[index]
             product?.let {
                 ProductListItem(
-                    productName = it.name ,
+                    productName = it.name,
                     productValue = it.price,
                     imageUrl = it.thumbnail,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp),
                 )
             }
         }
@@ -96,10 +97,10 @@ fun SearchContent(
                     item {
                         CircularProgressIndicator(
                             modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
-                                .wrapContentWidth(Alignment.CenterHorizontally),
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp)
+                                    .wrapContentWidth(Alignment.CenterHorizontally),
                         )
                     }
                 }
@@ -108,10 +109,10 @@ fun SearchContent(
                     item {
                         CircularProgressIndicator(
                             modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
-                                .wrapContentWidth(Alignment.CenterHorizontally),
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp)
+                                    .wrapContentWidth(Alignment.CenterHorizontally),
                         )
                     }
                 }
@@ -122,9 +123,9 @@ fun SearchContent(
                         Text(
                             text = "Error Loading Product: ${e.error.localizedMessage}",
                             modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
                         )
                     }
                 }
@@ -135,9 +136,9 @@ fun SearchContent(
                         Text(
                             text = "Error Loading Product: ${e.error.localizedMessage}",
                             modifier =
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp),
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
                         )
                     }
                 }

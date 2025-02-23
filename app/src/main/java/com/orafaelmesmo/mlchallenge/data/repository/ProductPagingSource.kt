@@ -23,9 +23,10 @@ class ProductPagingSource(
                 Log.i(TAG, "Product Load successful $response")
 
                 val searchResponse = response.body() ?: throw Exception("Empty response")
-                val products = searchResponse.results
-                    .filter { isValidProduct(it) }
-                    .map { ProductMapper.toDomain(it) }
+                val products =
+                    searchResponse.results
+                        .filter { isValidProduct(it) }
+                        .map { ProductMapper.toDomain(it) }
 
                 val nextKey = if (products.isEmpty()) null else currentOffset + params.loadSize
                 LoadResult.Page(
@@ -51,9 +52,9 @@ class ProductPagingSource(
 
     private fun isValidProduct(productRemote: ProductRemote): Boolean {
         return productRemote.id.isNotEmpty() &&
-                productRemote.title.isNotEmpty() &&
-                productRemote.price > 0 &&
-                isValidUrl(productRemote.thumbnail)
+            productRemote.title.isNotEmpty() &&
+            productRemote.price > 0 &&
+            isValidUrl(productRemote.thumbnail)
     }
 
     override fun getRefreshKey(state: PagingState<Int, Product>): Int? {
@@ -68,7 +69,7 @@ class ProductPagingSource(
         const val TAG = "ProductPagingSource"
     }
 
-    private fun isValidUrl(url : String): Boolean {
+    private fun isValidUrl(url: String): Boolean {
         return try {
             URL(url).toURI()
             true
