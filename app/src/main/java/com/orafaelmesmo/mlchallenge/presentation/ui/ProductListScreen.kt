@@ -1,5 +1,6 @@
-package com.orafaelmesmo.mlchallenge.presentation.viewmodel.ui
+package com.orafaelmesmo.mlchallenge.presentation.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,16 +29,17 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Suppress("FunctionName")
 @Composable
-fun ProductListScreen(modifier: Modifier = Modifier) {
+fun ProductListScreen(
+    modifier: Modifier = Modifier,
+    onProductClick: (String) -> Unit
+) {
     val viewModel: SearchViewModel = koinViewModel()
     val scrollBehavior =
         TopAppBarDefaults.enterAlwaysScrollBehavior(
             state = rememberTopAppBarState(),
         )
     Scaffold(
-        modifier =
-            modifier
-                .nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             AppTopBar(
                 scrollBehavior = scrollBehavior,
@@ -49,6 +51,7 @@ fun ProductListScreen(modifier: Modifier = Modifier) {
         SearchContent(
             paddingValues = paddingValues,
             viewModel = viewModel,
+            onProductClick = onProductClick,
         )
     }
 }
@@ -58,6 +61,7 @@ fun ProductListScreen(modifier: Modifier = Modifier) {
 fun SearchContent(
     paddingValues: PaddingValues,
     viewModel: SearchViewModel,
+    onProductClick: (String) -> Unit
 ) {
     val lazyListState = rememberLazyListState()
     val productsPagingItems = viewModel.productsPagingData.collectAsLazyPagingItems()
@@ -66,9 +70,9 @@ fun SearchContent(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         contentPadding =
-            PaddingValues(
-                top = paddingValues.calculateTopPadding() + 16.dp,
-            ),
+        PaddingValues(
+            top = paddingValues.calculateTopPadding() + 16.dp,
+        ),
         state = lazyListState,
     ) {
         items(
@@ -83,10 +87,12 @@ fun SearchContent(
                     productName = it.name,
                     productValue = it.price,
                     imageUrl = it.thumbnail,
-                    modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(16.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                        .clickable {
+                            onProductClick(it.id)
+                        }
                 )
             }
         }
@@ -97,10 +103,10 @@ fun SearchContent(
                     item {
                         CircularProgressIndicator(
                             modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp)
-                                    .wrapContentWidth(Alignment.CenterHorizontally),
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp)
+                                .wrapContentWidth(Alignment.CenterHorizontally),
                         )
                     }
                 }
@@ -109,10 +115,10 @@ fun SearchContent(
                     item {
                         CircularProgressIndicator(
                             modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp)
-                                    .wrapContentWidth(Alignment.CenterHorizontally),
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp)
+                                .wrapContentWidth(Alignment.CenterHorizontally),
                         )
                     }
                 }
@@ -123,9 +129,9 @@ fun SearchContent(
                         Text(
                             text = "Error Loading Product: ${e.error.localizedMessage}",
                             modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
                         )
                     }
                 }
@@ -136,9 +142,9 @@ fun SearchContent(
                         Text(
                             text = "Error Loading Product: ${e.error.localizedMessage}",
                             modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
                         )
                     }
                 }
