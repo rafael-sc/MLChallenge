@@ -22,6 +22,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.orafaelmesmo.mlchallenge.presentation.viewmodel.SearchViewModel
 import com.orafaelmesmo.mlchallenge.ui.components.AppTopBar
+import com.orafaelmesmo.mlchallenge.ui.components.ProductListItem
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -35,8 +36,8 @@ fun ProductListScreen(modifier: Modifier = Modifier) {
         )
     Scaffold(
         modifier =
-            modifier
-                .nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             AppTopBar(
                 scrollBehavior = scrollBehavior,
@@ -59,16 +60,15 @@ fun SearchContent(
     viewModel: SearchViewModel,
 ) {
     val lazyListState = rememberLazyListState()
-
     val productsPagingItems = viewModel.productsPagingData.collectAsLazyPagingItems()
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         contentPadding =
-            PaddingValues(
-                top = paddingValues.calculateTopPadding() + 16.dp,
-            ),
+        PaddingValues(
+            top = paddingValues.calculateTopPadding() + 16.dp,
+        ),
         state = lazyListState,
     ) {
         items(
@@ -77,13 +77,17 @@ fun SearchContent(
                 productsPagingItems[index]?.id ?: index
             },
         ) { index ->
-            Text(
-                text = productsPagingItems[index]?.name ?: "Name not found",
-                modifier =
-                    Modifier
+            val product = productsPagingItems[index]
+            product?.let {
+                ProductListItem(
+                    productName = it.name ,
+                    productValue = it.price,
+                    imageUrl = it.thumbnail,
+                    modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp),
-            )
+                )
+            }
         }
 
         productsPagingItems.apply {
@@ -92,10 +96,10 @@ fun SearchContent(
                     item {
                         CircularProgressIndicator(
                             modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp)
-                                    .wrapContentWidth(Alignment.CenterHorizontally),
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp)
+                                .wrapContentWidth(Alignment.CenterHorizontally),
                         )
                     }
                 }
@@ -104,10 +108,10 @@ fun SearchContent(
                     item {
                         CircularProgressIndicator(
                             modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp)
-                                    .wrapContentWidth(Alignment.CenterHorizontally),
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp)
+                                .wrapContentWidth(Alignment.CenterHorizontally),
                         )
                     }
                 }
@@ -118,21 +122,22 @@ fun SearchContent(
                         Text(
                             text = "Error Loading Product: ${e.error.localizedMessage}",
                             modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
                         )
                     }
                 }
+
                 loadState.append is LoadState.Error -> {
                     val e = loadState.append as LoadState.Error
                     item {
                         Text(
-                            text = "Erro ao carregar mais produtos: ${e.error.localizedMessage}",
+                            text = "Error Loading Product: ${e.error.localizedMessage}",
                             modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp),
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(16.dp),
                         )
                     }
                 }
