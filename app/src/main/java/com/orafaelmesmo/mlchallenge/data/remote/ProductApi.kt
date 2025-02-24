@@ -1,6 +1,6 @@
 package com.orafaelmesmo.mlchallenge.data.remote
 
-import com.orafaelmesmo.mlchallenge.data.model.ProductRemote
+import com.orafaelmesmo.mlchallenge.data.model.ProductDetailsResponse
 import com.orafaelmesmo.mlchallenge.data.model.SearchResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -24,5 +24,5 @@ interface ProductApi {
     @GET("products/{id}")
     suspend fun getProductDetails(
         @Path("id") id: String,
-    ): Response<ProductRemote>
+    ): Response<ProductDetailsResponse>
 }

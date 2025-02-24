@@ -3,7 +3,7 @@ package com.orafaelmesmo.mlchallenge.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.orafaelmesmo.mlchallenge.data.mapper.ProductMapper
+import com.orafaelmesmo.mlchallenge.data.mapper.ProductDetailsMapper
 import com.orafaelmesmo.mlchallenge.data.remote.ProductApi
 import com.orafaelmesmo.mlchallenge.domain.model.Product
 import kotlinx.coroutines.flow.Flow
@@ -26,8 +26,8 @@ class ProductRepositoryImpl(
     override suspend fun getProductDetails(id: String): Product {
         val response = apiService.getProductDetails(id)
         if (response.isSuccessful) {
-            val productRemote = response.body() ?: throw Exception("Product not found")
-            return ProductMapper.toDomain(productRemote)
+            val productDetailsRemote = response.body() ?: throw Exception("Product not found")
+            return ProductDetailsMapper.toDomain(productDetailsRemote)
         } else {
             throw Exception("Error getting product details: ${response.errorBody()?.string()}")
         }
