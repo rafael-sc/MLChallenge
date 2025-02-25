@@ -4,6 +4,7 @@ package com.orafaelmesmo.mlchallenge.presentation.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -16,11 +17,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.orafaelmesmo.mlchallenge.R
+import com.orafaelmesmo.mlchallenge.presentation.ScreenState
 import com.orafaelmesmo.mlchallenge.presentation.viewmodel.DetailsViewModel
-import com.orafaelmesmo.mlchallenge.presentation.viewmodel.ScreenState
 import com.orafaelmesmo.mlchallenge.ui.content.ProductDetailContent
 import org.koin.androidx.compose.koinViewModel
 
@@ -47,7 +51,7 @@ fun ProductDetailScreen(
         is ScreenState.Error -> {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(
-                    text = "Erro: ${state.message}",
+                    text = stringResource(R.string.error_prefix) + " ${state.message}",
                     style = MaterialTheme.typography.bodyLarge,
                 )
             }
@@ -59,13 +63,15 @@ fun ProductDetailScreen(
                     modifier = modifier,
                     topBar = {
                         TopAppBar(
+                            modifier = Modifier.heightIn(min = 56.dp, max = Dp.Unspecified),
                             title = {
                                 Text(
-                                    modifier = Modifier.padding(16.dp),
-                                    textAlign = TextAlign.Center,
+                                    modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 16.dp),
+                                    textAlign = TextAlign.Start,
                                     text = detail.name,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
+                                    maxLines = 3,
+                                    overflow = TextOverflow.Visible,
+                                    style = MaterialTheme.typography.headlineSmall,
                                 )
                             },
                         )
@@ -77,7 +83,10 @@ fun ProductDetailScreen(
                     )
                 }
             } ?: Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                Text(text = "Nenhum detalhe disponível")
+                Text(
+                    text = stringResource(id = R.string.no_details_available),
+                    style = MaterialTheme.typography.bodyLarge
+                )
             }
         }
     }

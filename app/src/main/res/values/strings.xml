@@ -1,3 +1,25 @@
 <resources>
+    <!-- Strings gerais -->
     <string name="app_name">ML Challenge</string>
+    <string name="loading">Carregando</string>
+
+    <!-- Mensagens de erro -->
+    <string name="error_prefix">Erro: </string>
+    <string name="no_details_available">Nenhum detalhe disponível</string>
+
+    <!-- Strings de busca -->
+    <string name="search">Buscar</string>
+    <string name="search_product">Buscar produto</string>
+    <string name="clear">Limpar</string>
+
+    <!-- Produto -->
+    <string name="product_name">Nome do Produto</string>
+    <string name="product_thumbnail_url">https://via.placeholder.com/300</string>
+    <string name="product_price">100.0</string>
+    <string name="product_image_description">Imagem do produto: </string>
+    <string name="product_description_prefix">Descrição: </string>
+    <string name="currency_symbol">R$ </string>
+    <string name="product_not_found">Nenhum produto encontrado.</string>
+    <string name="error_getting_product_details">Erro ao buscar os detalhes do produto: %1$s</string>
+    <string name="error_no_internet_connection">No internet connection</string>
 </resources>
