@@ -3,11 +3,11 @@ package com.orafaelmesmo.mlchallenge.data.repository
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.orafaelmesmo.mlchallenge.commom.isValidURL
 import com.orafaelmesmo.mlchallenge.data.mapper.ProductMapper
 import com.orafaelmesmo.mlchallenge.data.model.ProductRemote
 import com.orafaelmesmo.mlchallenge.data.remote.ProductApi
 import com.orafaelmesmo.mlchallenge.domain.model.Product
-import java.net.URL
 
 class ProductPagingSource(
     private val productApi: ProductApi,
@@ -54,7 +54,7 @@ class ProductPagingSource(
         return productRemote.id.isNotEmpty() &&
             productRemote.title.isNotEmpty() &&
             productRemote.price > 0 &&
-            isValidUrl(productRemote.thumbnail)
+            productRemote.thumbnail.isValidURL()
     }
 
     override fun getRefreshKey(state: PagingState<Int, Product>): Int? {
@@ -67,14 +67,5 @@ class ProductPagingSource(
     private companion object {
         const val STARTING_OFFSET = 0
         const val TAG = "ProductPagingSource"
-    }
-
-    private fun isValidUrl(url: String): Boolean {
-        return try {
-            URL(url).toURI()
-            true
-        } catch (e: Exception) {
-            false
-        }
     }
 }

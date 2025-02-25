@@ -6,4 +6,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface SearchProductsUseCase {
     suspend fun searchProducts(query: String): Flow<PagingData<Product>>
+
+    suspend fun getDetails(id: String)
 }

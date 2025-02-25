@@ -14,10 +14,12 @@ class SearchProductsUseCaseImpl(
         val result = repository.searchProducts(query)
         return result
             .catch { exception ->
-                // Você pode logar o erro, se necessário
                 Log.e("SearchProductsUseCase", "Erro ao buscar produtos", exception)
-                // Em caso de erro, emite um PagingData vazio
                 emit(PagingData.empty())
             }
+    }
+
+    override suspend fun getDetails(id: String) {
+        repository.getProductDetails(id)
     }
 }

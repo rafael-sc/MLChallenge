@@ -1,16 +1,22 @@
 package com.orafaelmesmo.mlchallenge.presentation.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.*
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
@@ -21,51 +27,57 @@ import coil3.request.crossfade
 import com.orafaelmesmo.mlchallenge.domain.model.Product
 
 @Composable
+@Suppress("FunctionName")
 fun ProductDetailScreen(
     modifier: Modifier = Modifier,
     productID: String,
 ) {
-    val product = Product(
-        id = "1",
-        name = "Product Name",
-        thumbnail = "https://via.placeholder.com/300",
-        price = "100.0",
-    )
+    val product =
+        Product(
+            id = "1",
+            name = "Product Name",
+            thumbnail = "https://via.placeholder.com/300",
+            price = "100.0",
+        )
     val scrollState = rememberScrollState()
 
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(scrollState)
+        modifier =
+            modifier
+                .fillMaxSize()
+                .verticalScroll(scrollState),
     ) {
         // Imagem principal
         Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(300.dp)
-                .background(MaterialTheme.colorScheme.surface)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .height(300.dp)
+                    .background(MaterialTheme.colorScheme.surface),
         ) {
             AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(product.thumbnail)
-                    .crossfade(true)
-                    .build(),
+                model =
+                    ImageRequest.Builder(LocalContext.current)
+                        .data(product.thumbnail)
+                        .crossfade(true)
+                        .build(),
                 contentDescription = "Imagem do produto: ${product.name}",
                 contentScale = ContentScale.Crop,
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
             )
         }
 
         // Conteúdo textual
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
         ) {
             // Nome do produto
             Text(
                 text = product.name,
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -74,7 +86,7 @@ fun ProductDetailScreen(
                 text = "description " + product.name,
                 style = MaterialTheme.typography.bodyMedium,
                 maxLines = 4,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -83,12 +95,12 @@ fun ProductDetailScreen(
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
                     text = "R\$ ${product.price}",
                     style = MaterialTheme.typography.titleLarge,
-                    color = MaterialTheme.colorScheme.primary
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
         }

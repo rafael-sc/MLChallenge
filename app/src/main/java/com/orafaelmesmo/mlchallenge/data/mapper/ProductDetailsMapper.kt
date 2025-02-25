@@ -1,25 +1,26 @@
 package com.orafaelmesmo.mlchallenge.data.mapper
 
+import com.orafaelmesmo.mlchallenge.commom.formattedValue
 import com.orafaelmesmo.mlchallenge.data.model.ProductDetailsResponse
 import com.orafaelmesmo.mlchallenge.domain.model.ProductDetail
 
 object ProductDetailsMapper {
-    fun toDomain(productDetails: ProductDetailsResponse): ProductDetail {
-        return ProductDetail(
-            id = productDetails.id,
-            name = productDetails.title,
-            price = "${productDetails.price}",
-//            thumbnail = productDetails.thumbnail.replace("http://", "https://"),
-        )
+    fun toDomain(
+        productRemote: ProductDetailsResponse,
+        description: String,
+    ): ProductDetail {
+        with(productRemote) {
+            return ProductDetail(
+                id = id,
+                name = title,
+                price = price.formattedValue(),
+                images = images,
+                permalink = "permalink",
+                originalPrice = "originalPrice.formattedValue()",
+                attributes = attributes,
+                warranty = "warranty",
+                descriptions = description,
+            )
+        }
     }
 }
-
-data class ProductDetail(
-    val id: String,
-    val name: String,
-    val images: List<String>,
-    val permalink: String,
-    val price: String,
-    val originalPrice: String,
-
-)

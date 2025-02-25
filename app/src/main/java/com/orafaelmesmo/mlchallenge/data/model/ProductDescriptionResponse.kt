@@ -4,10 +4,9 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class Paging(
-    val total: Int,
-    @Json(name = "primary_results")
-    val primaryResults: Int,
-    val offset: Int,
-    val limit: Int,
+data class ProductDescriptionResponse(
+    @Json(name = "text")
+    val text: String,
+    @Json(name = "plain_text")
+    val plainText: String,
 )

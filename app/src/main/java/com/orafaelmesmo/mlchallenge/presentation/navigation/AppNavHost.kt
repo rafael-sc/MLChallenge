@@ -11,12 +11,13 @@ import com.orafaelmesmo.mlchallenge.presentation.ui.ProductDetailScreen
 import com.orafaelmesmo.mlchallenge.presentation.ui.ProductListScreen
 
 @Composable
+@Suppress("FunctionName")
 fun AppNavHost() {
     val navController = rememberNavController()
 
     NavHost(
         navController = navController,
-        startDestination = "product_list"
+        startDestination = "product_list",
     ) {
         composable("product_list") {
             Scaffold { innerPadding ->
@@ -24,16 +25,16 @@ fun AppNavHost() {
                     modifier = Modifier.padding(innerPadding),
                     onProductClick = { productId ->
                         navController.navigate("product_detail/$productId")
-                    }
+                    },
                 )
             }
         }
 
         composable(
-            route = "product_detail/{productId}"
+            route = "product_detail/{productId}",
         ) { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId") ?: ""
-            ProductDetailScreen(productID = productId, )
+            ProductDetailScreen(productID = productId)
         }
     }
 }

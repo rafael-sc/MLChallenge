@@ -16,8 +16,9 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
-class SearchViewModel(
+class DetailsViewModel(
     private val searchProductsUseCase: SearchProductsUseCase,
 ) : ViewModel() {
     private val searchState = MutableStateFlow<ScreenState>(ScreenState.Idle)
@@ -47,5 +48,11 @@ class SearchViewModel(
 
     fun searchProducts(query: String) {
         searchQuery.value = query
+    }
+
+    fun onItemClicked(productId: String) {
+        viewModelScope.launch {
+            searchProductsUseCase.getDetails("MLB2634583064")
+        }
     }
 }

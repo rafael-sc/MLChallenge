@@ -9,7 +9,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 object RetrofitClient {
     private const val BASE_URL = "https://api.mercadolibre.com/"
 
-    // Instância do Moshi para conversão JSON
     private val moshi =
         Moshi.Builder()
             .build()
@@ -26,5 +25,4 @@ object RetrofitClient {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }
-    val apiService: ProductApi = retrofit.create(ProductApi::class.java)
 }
