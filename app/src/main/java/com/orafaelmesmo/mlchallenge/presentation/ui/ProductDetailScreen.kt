@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.orafaelmesmo.mlchallenge.presentation.viewmodel.DetailsViewModel
 import com.orafaelmesmo.mlchallenge.presentation.viewmodel.ScreenState
-import com.orafaelmesmo.mlchallenge.ui.components.ProductDetailContent
+import com.orafaelmesmo.mlchallenge.ui.content.ProductDetailContent
 import org.koin.androidx.compose.koinViewModel
 
 @Composable

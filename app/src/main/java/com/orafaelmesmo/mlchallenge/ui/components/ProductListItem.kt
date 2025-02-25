@@ -23,17 +23,19 @@ fun ProductListItem(
     modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .padding(16.dp),
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         AppAsyncImage(
             imageUrl = imageUrl,
             contentDescription = "Imagem do produto: $productName",
-            modifier = Modifier
-                .width(80.dp)
-                .height(80.dp)
+            modifier =
+                Modifier
+                    .width(80.dp)
+                    .height(80.dp),
         )
         Spacer(modifier = Modifier.width(16.dp))
         Column {

@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.orafaelmesmo.mlchallenge.presentation.viewmodel.SearchViewModel
 import com.orafaelmesmo.mlchallenge.ui.components.AppTopBar
-import com.orafaelmesmo.mlchallenge.ui.components.SearchContent
+import com.orafaelmesmo.mlchallenge.ui.content.SearchContent
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -18,7 +18,7 @@ import org.koin.androidx.compose.koinViewModel
 fun ProductListScreen(
     modifier: Modifier = Modifier,
     onProductClick: (String) -> Unit,
-    viewModel: SearchViewModel = koinViewModel()
+    viewModel: SearchViewModel = koinViewModel(),
 ) {
     val scrollBehavior =
         TopAppBarDefaults.enterAlwaysScrollBehavior(

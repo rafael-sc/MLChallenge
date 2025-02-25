@@ -1,4 +1,4 @@
-package com.orafaelmesmo.mlchallenge.ui.components
+package com.orafaelmesmo.mlchallenge.ui.content
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,8 +20,10 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.orafaelmesmo.mlchallenge.presentation.viewmodel.SearchViewModel
+import com.orafaelmesmo.mlchallenge.ui.components.ProductListItem
 
 @Composable
+@Suppress("FunctionName")
 fun SearchContent(
     paddingValues: PaddingValues,
     viewModel: SearchViewModel,
@@ -38,26 +40,28 @@ fun SearchContent(
     }
 
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(paddingValues),
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
         horizontalAlignment = Alignment.CenterHorizontally,
         contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp),
         state = lazyListState,
     ) {
         itemsIndexed(
             items = List(productsPagingItems.itemCount) { index -> productsPagingItems[index] },
-            key = { index, product -> product?.id ?: index }
+            key = { index, product -> product?.id ?: index },
         ) { _, product ->
             product?.let {
                 ProductListItem(
                     productName = it.name,
                     productValue = it.price,
                     imageUrl = it.thumbnail,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                        .clickable { onProductClick(it.id) }
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                            .clickable { onProductClick(it.id) },
                 )
             }
         }
@@ -67,20 +71,22 @@ fun SearchContent(
                 loadState.refresh is LoadState.Loading -> {
                     item {
                         CircularProgressIndicator(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
-                                .wrapContentWidth(Alignment.CenterHorizontally)
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp)
+                                    .wrapContentWidth(Alignment.CenterHorizontally),
                         )
                     }
                 }
                 loadState.append is LoadState.Loading -> {
                     item {
                         CircularProgressIndicator(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
-                                .wrapContentWidth(Alignment.CenterHorizontally)
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp)
+                                    .wrapContentWidth(Alignment.CenterHorizontally),
                         )
                     }
                 }
@@ -89,9 +95,10 @@ fun SearchContent(
                     item {
                         Text(
                             text = "Error Loading Product: ${e.error.localizedMessage}",
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
                         )
                     }
                 }
@@ -100,9 +107,10 @@ fun SearchContent(
                     item {
                         Text(
                             text = "Error Loading Product: ${e.error.localizedMessage}",
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(16.dp)
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .padding(16.dp),
                         )
                     }
                 }
