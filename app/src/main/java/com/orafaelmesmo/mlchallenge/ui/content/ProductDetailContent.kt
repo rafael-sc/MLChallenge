@@ -20,6 +20,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.orafaelmesmo.mlchallenge.domain.model.ProductDetail
@@ -60,6 +61,7 @@ fun ProductDetailContent(
         ) {
             Box(modifier = Modifier.weight(1f)) {
                 ImageCarouselWithControls(
+                    modifier = Modifier.fillMaxSize(),
                     images = product.images,
                     pagerState = pagerState,
                     onImageClick = { index ->
@@ -134,7 +136,12 @@ fun ProductDetailContent(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(
+    showBackground = true,
+    backgroundColor = 0xdedede,
+    showSystemUi = true,
+    device = Devices.PIXEL_4,
+)
 @Composable
 @Suppress("FunctionName")
 fun ProductDetailContentPreview() {

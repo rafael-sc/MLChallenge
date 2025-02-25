@@ -63,8 +63,11 @@ fun AppTopBar(
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(end = 8.dp),
                 )
-
                 TextField(
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .weight(1f),
                     value = textFieldValue,
                     onValueChange = { newValue ->
                         textFieldValue = newValue
@@ -80,10 +83,6 @@ fun AppTopBar(
                             unfocusedIndicatorColor = Color.Transparent,
                             disabledIndicatorColor = Color.Transparent,
                         ),
-                    modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .weight(1f),
                     shape = RoundedCornerShape(100.dp),
                     trailingIcon = {
                         if (textFieldValue.isNotEmpty()) {

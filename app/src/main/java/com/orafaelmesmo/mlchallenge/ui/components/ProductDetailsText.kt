@@ -18,10 +18,6 @@ import com.orafaelmesmo.mlchallenge.domain.model.ProductDetail
 @Composable
 @Suppress("FunctionName")
 fun ProductDetailsText(product: ProductDetail) {
-    Text(
-        text = product.name,
-        style = MaterialTheme.typography.titleLarge,
-    )
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
             text = product.price,
@@ -61,7 +57,7 @@ fun ProductDetailsText(product: ProductDetail) {
             style = MaterialTheme.typography.bodyMedium,
         )
     }
-        Spacer(modifier = Modifier.height(8.dp))
+    Spacer(modifier = Modifier.height(8.dp))
     SelectionContainer {
         Text(
             text = "Link do produto: ${product.permalink}",

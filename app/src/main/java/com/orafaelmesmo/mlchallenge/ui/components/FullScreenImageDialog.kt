@@ -15,7 +15,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
@@ -35,7 +35,7 @@ fun FullScreenImageDialog(
     initialIndex: Int,
     onDismiss: () -> Unit,
 ) {
-    var currentIndex by remember { mutableStateOf(initialIndex) }
+    var currentIndex by remember { mutableIntStateOf(initialIndex) }
     val pagerState = rememberPagerState(initialPage = initialIndex, pageCount = { images.size })
     val coroutineScope = rememberCoroutineScope()
 

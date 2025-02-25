@@ -25,7 +25,8 @@ data class ProductDetailsResponse(
             }
 
     val attributes: List<String>
-        get() = attributeList.mapNotNull {
-            if (it.name.isNotEmpty() && !it.valueName.isNullOrEmpty()) "${it.name}: ${it.valueName}" else null
-        }
+        get() =
+            attributeList.mapNotNull {
+                if (it.name.isNotEmpty() && !it.valueName.isNullOrEmpty()) "${it.name}: ${it.valueName}" else null
+            }
 }

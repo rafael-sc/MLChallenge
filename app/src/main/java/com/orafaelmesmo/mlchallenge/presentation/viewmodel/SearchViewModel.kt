@@ -39,7 +39,7 @@ class SearchViewModel(
             }
             .stateIn(
                 scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(5000),
+                started = SharingStarted.WhileSubscribed(Long.MAX_VALUE),
                 initialValue = PagingData.empty(),
             )
 

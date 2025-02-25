@@ -48,6 +48,7 @@ fun ImageCarouselWithControls(
                         .fillMaxSize()
                         .clickable { onImageClick(page) },
                 imageUrl = images[page],
+                showPlaceholder = false,
                 contentDescription = "Imagem ${page + 1} do produto",
             )
         }
