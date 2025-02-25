@@ -1,8 +1,9 @@
 package com.orafaelmesmo.mlchallenge.data.repository
 
-import android.util.Log
+
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.orafaelmesmo.mlchallenge.commom.AppLogger
 import com.orafaelmesmo.mlchallenge.commom.isValidURL
 import com.orafaelmesmo.mlchallenge.data.mapper.ProductMapper
 import com.orafaelmesmo.mlchallenge.data.model.ProductRemote
@@ -12,6 +13,7 @@ import com.orafaelmesmo.mlchallenge.domain.model.Product
 class ProductPagingSource(
     private val productApi: ProductApi,
     private val query: String,
+    private val appLogger: AppLogger
 ) : PagingSource<Int, Product>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Product> {
         val currentOffset = params.key ?: STARTING_OFFSET
@@ -20,7 +22,7 @@ class ProductPagingSource(
                 productApi.searchProducts(query, offset = currentOffset, limit = params.loadSize)
 
             if (response.isSuccessful) {
-                Log.i(TAG, "Product Load successful $response")
+                appLogger.i(TAG, "Product Load successful $response")
 
                 val searchResponse = response.body() ?: throw Exception("Empty response")
                 val products =
@@ -35,7 +37,7 @@ class ProductPagingSource(
                     nextKey = nextKey,
                 )
             } else {
-                Log.e(TAG, "Empty response body")
+                appLogger.e(TAG, "Empty response body")
                 LoadResult.Error(
                     Exception(
                         "Error searching products: ${
@@ -45,16 +47,16 @@ class ProductPagingSource(
                 )
             }
         } catch (e: Exception) {
-            Log.e(TAG, "Error loading products", e)
+            appLogger.e(TAG, "Error loading products", e)
             LoadResult.Error(e)
         }
     }
 
     private fun isValidProduct(productRemote: ProductRemote): Boolean {
         return productRemote.id.isNotEmpty() &&
-            productRemote.title.isNotEmpty() &&
-            productRemote.price > 0 &&
-            productRemote.thumbnail.isValidURL()
+                productRemote.title.isNotEmpty() &&
+                productRemote.price > 0 &&
+                productRemote.thumbnail.isValidURL()
     }
 
     override fun getRefreshKey(state: PagingState<Int, Product>): Int? {

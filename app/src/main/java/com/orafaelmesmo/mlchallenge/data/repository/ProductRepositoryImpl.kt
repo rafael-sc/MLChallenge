@@ -1,10 +1,10 @@
 package com.orafaelmesmo.mlchallenge.data.repository
 
-import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.orafaelmesmo.mlchallenge.R
+import com.orafaelmesmo.mlchallenge.commom.AppLogger
 import com.orafaelmesmo.mlchallenge.commom.ResourceProvider
 import com.orafaelmesmo.mlchallenge.data.mapper.DescriptionMapper
 import com.orafaelmesmo.mlchallenge.data.mapper.ProductDetailsMapper
@@ -15,7 +15,8 @@ import kotlinx.coroutines.flow.Flow
 
 class ProductRepositoryImpl(
     private val apiService: ProductApi,
-    private val resourceProvider: ResourceProvider
+    private val resourceProvider: ResourceProvider,
+    private val appLogger: AppLogger
 ) : ProductRepository {
     override suspend fun searchProducts(query: String): Flow<PagingData<Product>> {
         return Pager(
@@ -25,7 +26,7 @@ class ProductRepositoryImpl(
                 prefetchDistance = 10,
             ),
         ) {
-            ProductPagingSource(apiService, query)
+            ProductPagingSource(apiService, query, appLogger)
         }.flow
     }
 
@@ -55,7 +56,7 @@ class ProductRepositoryImpl(
                 )
             )
         } catch (e: Exception) {
-            Log.e("ProductDetails", "Error getting product details", e)
+            appLogger.e("ProductDetails", "Error getting product details", e)
             Result.failure(e)
         }
     }
@@ -67,7 +68,7 @@ class ProductRepositoryImpl(
                 val description = descriptions.body()
                 return DescriptionMapper.toDomain(description)
             } else {
-                Log.e(
+                appLogger.e(
                     "ProductDescription",
                     "Error getting product descriptions: ${
                         descriptions.errorBody()?.string()
@@ -76,7 +77,7 @@ class ProductRepositoryImpl(
                 return "No description provided"
             }
         } catch (e: Exception) {
-            Log.e("ProductDescription", "Error getting product descriptions", e)
+            appLogger.e("ProductDescription", "Error getting product descriptions", e)
             throw e
         }
     }

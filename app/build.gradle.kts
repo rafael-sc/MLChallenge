@@ -40,6 +40,9 @@ android {
     buildFeatures {
         compose = true
     }
+//    testOptions {
+//        unitTests.isIncludeAndroidResources = true
+//    }
 }
 
 dependencies {
@@ -68,6 +71,9 @@ dependencies {
     implementation(libs.coil.network.okhttp)
 
     testImplementation(libs.junit)
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.paging.common.ktx)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

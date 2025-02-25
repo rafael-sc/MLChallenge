@@ -1,5 +1,6 @@
 package com.orafaelmesmo.mlchallenge.di
 
+import com.orafaelmesmo.mlchallenge.commom.AppLogger
 import com.orafaelmesmo.mlchallenge.commom.NetworkUtils
 import com.orafaelmesmo.mlchallenge.commom.ResourceProvider
 import com.orafaelmesmo.mlchallenge.data.remote.ProductApi
@@ -22,6 +23,9 @@ import retrofit2.Retrofit
 val appModule =
     module {
         //commom
+        factory <AppLogger>{
+            AppLogger
+        }
         single<NetworkUtils> {
             NetworkUtils(androidContext())
         }
@@ -33,13 +37,15 @@ val appModule =
         factory<ProductRepository> {
             ProductRepositoryImpl(
                 apiService = get(),
-                resourceProvider = get()
+                resourceProvider = get(),
+                appLogger = get()
             )
         }
         // use case
         factory<SearchProductsUseCase> {
             SearchProductsUseCaseImpl(
                 repository = get(),
+                appLogger = get()
             )
         }
 
