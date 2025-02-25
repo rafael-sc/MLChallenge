@@ -32,8 +32,8 @@ import org.koin.androidx.compose.koinViewModel
 fun ProductListScreen(
     modifier: Modifier = Modifier,
     onProductClick: (String) -> Unit,
+    viewModel: SearchViewModel = koinViewModel()
 ) {
-    val viewModel: SearchViewModel = koinViewModel()
     val scrollBehavior =
         TopAppBarDefaults.enterAlwaysScrollBehavior(
             state = rememberTopAppBarState(),

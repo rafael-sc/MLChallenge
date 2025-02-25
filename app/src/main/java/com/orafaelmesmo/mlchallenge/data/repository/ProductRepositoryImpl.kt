@@ -29,7 +29,6 @@ class ProductRepositoryImpl(
     override suspend fun getProductDetails(id: String): ProductDetail {
         try {
             val response = apiService.getProductDetails(id)
-            getProductDescription(id)
             if (response.isSuccessful) {
                 val productDetailsRemote = response.body() ?: throw Exception("Product not found")
                 val result =

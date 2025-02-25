@@ -18,8 +18,4 @@ class SearchProductsUseCaseImpl(
                 emit(PagingData.empty())
             }
     }
-
-    override suspend fun getDetails(id: String) {
-        repository.getProductDetails(id)
-    }
 }

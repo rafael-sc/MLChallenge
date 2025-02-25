@@ -20,8 +20,6 @@ import kotlinx.coroutines.flow.stateIn
 class SearchViewModel(
     private val searchProductsUseCase: SearchProductsUseCase,
 ) : ViewModel() {
-    private val searchState = MutableStateFlow<ScreenState>(ScreenState.Idle)
-
     private val searchQuery = MutableStateFlow("")
     private var lastQuery: String = ""
 

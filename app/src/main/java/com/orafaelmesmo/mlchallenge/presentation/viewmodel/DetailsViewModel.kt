@@ -2,57 +2,33 @@ package com.orafaelmesmo.mlchallenge.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
-import com.orafaelmesmo.mlchallenge.domain.model.Product
-import com.orafaelmesmo.mlchallenge.domain.usecase.SearchProductsUseCase
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
+import com.orafaelmesmo.mlchallenge.domain.model.ProductDetail
+import com.orafaelmesmo.mlchallenge.domain.usecase.ProductsDetailsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class DetailsViewModel(
-    private val searchProductsUseCase: SearchProductsUseCase,
+    private val productsDetailsUseCase: ProductsDetailsUseCase,
 ) : ViewModel() {
-    private val searchState = MutableStateFlow<ScreenState>(ScreenState.Idle)
+    private val _searchState = MutableStateFlow<ScreenState>(ScreenState.Idle)
+    val searchState: StateFlow<ScreenState> = _searchState
 
-    private val searchQuery = MutableStateFlow("")
-    private var lastQuery: String = ""
+    private val _productDetail = MutableStateFlow<ProductDetail?>(null)
+    val productDetail: StateFlow<ProductDetail?> = _productDetail
 
-    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
-    val productsPagingData: StateFlow<PagingData<Product>> =
-        searchQuery
-            .debounce(500)
-            .distinctUntilChanged()
-            .flatMapLatest { currentQuery ->
-                if (currentQuery.isNotEmpty() && lastQuery != currentQuery) {
-                    lastQuery = currentQuery
-                    searchProductsUseCase.searchProducts(currentQuery)
-                        .cachedIn(viewModelScope)
-                } else {
-                    flowOf(PagingData.empty())
-                }
-            }
-            .stateIn(
-                scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(5000),
-                initialValue = PagingData.empty(),
-            )
-
-    fun searchProducts(query: String) {
-        searchQuery.value = query
-    }
-
-    fun onItemClicked(productId: String) {
+    fun getProductsDetails(productId: String) {
+        if (productDetail.value != null) return
         viewModelScope.launch {
-            searchProductsUseCase.getDetails("MLB2634583064")
+            _searchState.value = ScreenState.Loading
+            try {
+                productsDetailsUseCase.getProductsDetails(productId).let { detail ->
+                    _productDetail.value = detail
+                    _searchState.value = ScreenState.Idle
+                }
+            } catch (e: Exception) {
+                _searchState.value = ScreenState.Error(e.message.orEmpty())
+            }
         }
     }
 }

@@ -15,10 +15,10 @@ object ProductDetailsMapper {
                 name = title,
                 price = price.formattedValue(),
                 images = images,
-                permalink = "permalink",
-                originalPrice = "originalPrice.formattedValue()",
+                permalink = permalink,
+                originalPrice = originalPrice?.formattedValue().orEmpty(),
                 attributes = attributes,
-                warranty = "warranty",
+                warranty = warranty.orEmpty(),
                 descriptions = description,
             )
         }
