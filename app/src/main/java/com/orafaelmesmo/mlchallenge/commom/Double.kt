@@ -2,4 +2,4 @@ package com.orafaelmesmo.mlchallenge.commom
 
 import java.util.Locale
 
-fun Double.formattedValue() = String.format(Locale.getDefault(), "%.2f", this)
+fun Double.toBrl() = String.format(Locale.getDefault(), "R\$ %.2f", this)
