@@ -69,8 +69,7 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
-    testImplementation(libs.kotlinx.coroutines.test)
-    testImplementation(libs.androidx.paging.common.ktx)
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
@@ -80,6 +79,8 @@ dependencies {
 
     testImplementation (libs.androidx.core)
     testImplementation (libs.mockito.core)
-    testImplementation ("org.mockito.kotlin:mockito-kotlin:3.2.0")
-
+    testImplementation (libs.mockito.kotlin)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.paging.common.ktx)
+    testImplementation(libs.androidx.core.testing)
 }
