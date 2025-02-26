@@ -40,9 +40,6 @@ android {
     buildFeatures {
         compose = true
     }
-//    testOptions {
-//        unitTests.isIncludeAndroidResources = true
-//    }
 }
 
 dependencies {
@@ -80,4 +77,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    testImplementation (libs.androidx.core)
+    testImplementation (libs.mockito.core)
+    testImplementation ("org.mockito.kotlin:mockito-kotlin:3.2.0")
+
 }

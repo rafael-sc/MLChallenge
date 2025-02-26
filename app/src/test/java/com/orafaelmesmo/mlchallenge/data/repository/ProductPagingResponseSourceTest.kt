@@ -64,7 +64,7 @@ class ProductPagingResponseSourceTest {
             )
         )
 
-        val expected = PagingSource.LoadResult.Page(
+        val expected = Page(
             data = mockProducts.map { ProductMapper.toDomain(it) },
             prevKey = null,
             nextKey = 2
