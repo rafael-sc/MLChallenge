@@ -6,31 +6,6 @@ plugins {
     alias(libs.plugins.detekt)
     alias(libs.plugins.google.devtools.ksp)
 }
-//*
-// app/
-//│── data/
-//│   │── repository/
-//│   │   ├── SettingsRepositoryImpl.kt
-//│   │── datastore/
-//│   │   ├── SettingsDataStore.kt
-//│
-//│── domain/
-//│   │── repository/
-//│   │   ├── SettingsRepository.kt
-//│
-//│── presentation/
-//│   │── settings/
-//│   │   ├── SettingsViewModel.kt
-//│   │   ├── SettingsScreen.kt
-//│
-//│── di/
-//│   ├── AppModule.kt  (caso use Koin)
-//│   ├── SettingsModule.kt  (caso use Hilt)
-//│
-//│── fake/
-//│   ├── FakeSettingsRepository.kt  (para testes)
-//│
-// **//
 
 android {
     namespace = "com.orafaelmesmo.mlchallenge"
