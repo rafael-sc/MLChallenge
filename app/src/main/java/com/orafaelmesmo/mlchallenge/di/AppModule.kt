@@ -28,7 +28,7 @@ import retrofit2.Retrofit
 
 val appModule =
     module {
-        //commom
+        // commom
         factory<AppLogger> {
             AppLogger
         }
@@ -44,7 +44,7 @@ val appModule =
             ProductRepositoryImpl(
                 apiService = get(),
                 resourceProvider = get(),
-                appLogger = get()
+                appLogger = get(),
             )
         }
 
@@ -55,7 +55,7 @@ val appModule =
         factory<SearchProductsUseCase> {
             SearchProductsUseCaseImpl(
                 repository = get(),
-                appLogger = get()
+                appLogger = get(),
             )
         }
 
@@ -67,13 +67,13 @@ val appModule =
 
         factory<NetworkCheckUseCase> {
             NetworkCheckUseCaseImpl(
-                networkUtils = get()
+                networkUtils = get(),
             )
         }
 
-        factory <SettingsUseCase> {
+        factory<SettingsUseCase> {
             SettingsUseCaseImpl(
-                repository = get()
+                repository = get(),
             )
         }
 
@@ -82,7 +82,7 @@ val appModule =
             SearchViewModel(
                 searchProductsUseCase = get(),
                 networkCheckUseCase = get(),
-                resourceProvider = get()
+                resourceProvider = get(),
             )
         }
 
@@ -90,13 +90,13 @@ val appModule =
             DetailsViewModel(
                 productsDetailsUseCase = get(),
                 networkCheckUseCase = get(),
-                resourceProvider = get()
+                resourceProvider = get(),
             )
         }
 
         viewModel<SettingsViewModel> {
             SettingsViewModel(
-                settingsUseCase = get()
+                settingsUseCase = get(),
             )
         }
 

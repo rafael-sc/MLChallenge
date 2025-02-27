@@ -4,9 +4,7 @@ import com.orafaelmesmo.mlchallenge.data.model.ProductDescriptionResponse
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-
 class DescriptionMapperTest {
-
     @Test
     fun toDomain_returnsText_whenTextIsNotEmpty() {
         val response = ProductDescriptionResponse(text = "Description text", plainText = "")

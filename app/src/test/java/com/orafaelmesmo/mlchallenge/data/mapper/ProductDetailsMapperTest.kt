@@ -7,39 +7,41 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class ProductDetailsMapperTest {
-
     @Test
     fun toDomain_mapsCorrectly_whenAllFieldsArePresent() {
-        val response = ProductDetailsResponse(
-            id = "1",
-            title = "Product Title",
-            price = 100.0,
-            pictureList = listOf(
-                PictureResponse(
-                    url = "http:sample.url.com",
-                    secureUrl = "https:sample.url.com"
-                ),
-                PictureResponse(
-                    url = "http:sample.url.com",
-                    secureUrl = "https:sample.url.com"
-                ),
-            ),
-            permalink = "http://example.com",
-            originalPrice = 120.0,
-            attributeList = listOf(
-                AttributeResponse(
-                    id = "1",
-                    name = "attr1",
-                    valueName = "value1"
-                ),
-                AttributeResponse(
-                    id = "2",
-                    name = "attr2",
-                    valueName = "value2"
-                ),
-            ),
-            warranty = "1 year"
-        )
+        val response =
+            ProductDetailsResponse(
+                id = "1",
+                title = "Product Title",
+                price = 100.0,
+                pictureList =
+                    listOf(
+                        PictureResponse(
+                            url = "http:sample.url.com",
+                            secureUrl = "https:sample.url.com",
+                        ),
+                        PictureResponse(
+                            url = "http:sample.url.com",
+                            secureUrl = "https:sample.url.com",
+                        ),
+                    ),
+                permalink = "http://example.com",
+                originalPrice = 120.0,
+                attributeList =
+                    listOf(
+                        AttributeResponse(
+                            id = "1",
+                            name = "attr1",
+                            valueName = "value1",
+                        ),
+                        AttributeResponse(
+                            id = "2",
+                            name = "attr2",
+                            valueName = "value2",
+                        ),
+                    ),
+                warranty = "1 year",
+            )
         val description = "Product description"
         val result = ProductDetailsMapper.toDomain(response, description)
         assertEquals("1", result.id)
@@ -55,36 +57,39 @@ class ProductDetailsMapperTest {
 
     @Test
     fun toDomain_mapsCorrectly_whenOriginalPriceIsNull() {
-        val response = ProductDetailsResponse(
-            id = "1",
-            title = "Product Title",
-            price = 100.0,
-            pictureList = listOf(
-                PictureResponse(
-                    url = "http:sample.url.com",
-                    secureUrl = "https:sample.url.com"
-                ),
-                PictureResponse(
-                    url = "http:sample.url.com",
-                    secureUrl = "https:sample.url.com"
-                ),
-            ),
-            permalink = "http://example.com",
-            originalPrice = null,
-            attributeList = listOf(
-                AttributeResponse(
-                    id = "1",
-                    name = "attr1",
-                    valueName = "value1"
-                ),
-                AttributeResponse(
-                    id = "2",
-                    name = "attr2",
-                    valueName = "value2"
-                ),
-            ),
-            warranty = "1 year"
-        )
+        val response =
+            ProductDetailsResponse(
+                id = "1",
+                title = "Product Title",
+                price = 100.0,
+                pictureList =
+                    listOf(
+                        PictureResponse(
+                            url = "http:sample.url.com",
+                            secureUrl = "https:sample.url.com",
+                        ),
+                        PictureResponse(
+                            url = "http:sample.url.com",
+                            secureUrl = "https:sample.url.com",
+                        ),
+                    ),
+                permalink = "http://example.com",
+                originalPrice = null,
+                attributeList =
+                    listOf(
+                        AttributeResponse(
+                            id = "1",
+                            name = "attr1",
+                            valueName = "value1",
+                        ),
+                        AttributeResponse(
+                            id = "2",
+                            name = "attr2",
+                            valueName = "value2",
+                        ),
+                    ),
+                warranty = "1 year",
+            )
         val description = "Product description"
         val result = ProductDetailsMapper.toDomain(response, description)
         assertEquals("", result.originalPrice)
@@ -98,36 +103,39 @@ class ProductDetailsMapperTest {
 
     @Test
     fun toDomain_mapsCorrectly_whenWarrantyIsNull() {
-        val response = ProductDetailsResponse(
-            id = "1",
-            title = "Product Title",
-            price = 100.0,
-            pictureList = listOf(
-                PictureResponse(
-                    url = "http:sample.url.com",
-                    secureUrl = "https:sample.url.com"
-                ),
-                PictureResponse(
-                    url = "http:sample.url.com",
-                    secureUrl = "https:sample.url.com"
-                ),
-            ),
-            permalink = "http://example.com",
-            originalPrice = 120.0,
-            attributeList = listOf(
-                AttributeResponse(
-                    id = "1",
-                    name = "attr1",
-                    valueName = "value1"
-                ),
-                AttributeResponse(
-                    id = "2",
-                    name = "attr2",
-                    valueName = "value2"
-                ),
-            ),
-            warranty = null
-        )
+        val response =
+            ProductDetailsResponse(
+                id = "1",
+                title = "Product Title",
+                price = 100.0,
+                pictureList =
+                    listOf(
+                        PictureResponse(
+                            url = "http:sample.url.com",
+                            secureUrl = "https:sample.url.com",
+                        ),
+                        PictureResponse(
+                            url = "http:sample.url.com",
+                            secureUrl = "https:sample.url.com",
+                        ),
+                    ),
+                permalink = "http://example.com",
+                originalPrice = 120.0,
+                attributeList =
+                    listOf(
+                        AttributeResponse(
+                            id = "1",
+                            name = "attr1",
+                            valueName = "value1",
+                        ),
+                        AttributeResponse(
+                            id = "2",
+                            name = "attr2",
+                            valueName = "value2",
+                        ),
+                    ),
+                warranty = null,
+            )
         val description = "Product description"
         val result = ProductDetailsMapper.toDomain(response, description)
         assertEquals("", result.warranty)
@@ -135,35 +143,39 @@ class ProductDetailsMapperTest {
 
     @Test
     fun toDomain_mapsCorrectly_whenDescriptionIsEmpty() {
-        val response = ProductDetailsResponse(
-            id = "1",
-            title = "Product Title",
-            price = 100.0,
-            pictureList = listOf(
-                PictureResponse(
-                    url = "http:sample.url.com",
-                    secureUrl = "https:sample.url.com"
-                ),
-                PictureResponse(
-                    url = "http:sample.url.com",
-                    secureUrl = "https:sample.url.com"
-                ),
-            ),            permalink = "http://example.com",
-            originalPrice = 120.0,
-            attributeList = listOf(
-                AttributeResponse(
-                    id = "1",
-                    name = "attr1",
-                    valueName = "value1"
-                ),
-                AttributeResponse(
-                    id = "2",
-                    name = "attr2",
-                    valueName = "value2"
-                ),
-            ),
-            warranty = "1 year"
-        )
+        val response =
+            ProductDetailsResponse(
+                id = "1",
+                title = "Product Title",
+                price = 100.0,
+                pictureList =
+                    listOf(
+                        PictureResponse(
+                            url = "http:sample.url.com",
+                            secureUrl = "https:sample.url.com",
+                        ),
+                        PictureResponse(
+                            url = "http:sample.url.com",
+                            secureUrl = "https:sample.url.com",
+                        ),
+                    ),
+                permalink = "http://example.com",
+                originalPrice = 120.0,
+                attributeList =
+                    listOf(
+                        AttributeResponse(
+                            id = "1",
+                            name = "attr1",
+                            valueName = "value1",
+                        ),
+                        AttributeResponse(
+                            id = "2",
+                            name = "attr2",
+                            valueName = "value2",
+                        ),
+                    ),
+                warranty = "1 year",
+            )
         val description = ""
         val result = ProductDetailsMapper.toDomain(response, description)
         assertEquals("", result.descriptions)

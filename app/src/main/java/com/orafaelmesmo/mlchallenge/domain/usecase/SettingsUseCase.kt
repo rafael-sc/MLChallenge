@@ -7,5 +7,6 @@ interface SettingsUseCase {
     val textSize: Flow<Float>
 
     suspend fun saveTheme(theme: String)
+
     suspend fun saveTextSize(size: Float)
 }

@@ -60,7 +60,7 @@ fun ProductDetailScreen(
                     topBar = {
                         SimpleTopAppBar(
                             detailName = detail.name,
-                            onBackClick
+                            onBackClick,
                         )
                     },
                 ) { paddingValues ->
@@ -72,7 +72,7 @@ fun ProductDetailScreen(
             } ?: Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(
                     text = stringResource(id = R.string.no_details_available),
-                    style = MaterialTheme.typography.bodyLarge
+                    style = MaterialTheme.typography.bodyLarge,
                 )
             }
         }

@@ -9,7 +9,7 @@ class LoggingInterceptor : Interceptor {
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
-        AppLogger.d("-- LoggingInterceptor --", "****** Request:\n ${request.url}")
+        AppLogger.debug("-- LoggingInterceptor --", "****** Request:\n ${request.url}")
         return chain.proceed(request)
     }
 }

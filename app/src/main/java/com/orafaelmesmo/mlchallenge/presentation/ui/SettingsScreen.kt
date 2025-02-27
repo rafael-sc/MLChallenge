@@ -21,13 +21,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.orafaelmesmo.mlchallenge.presentation.viewmodel.SettingsViewModel
 import com.orafaelmesmo.mlchallenge.ui.components.SimpleTopAppBar
+import java.util.Locale
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SettingsScreen(
     modifier: Modifier = Modifier,
     onBackClick: () -> Unit,
-    viewModel: SettingsViewModel = koinViewModel()
+    viewModel: SettingsViewModel = koinViewModel(),
 ) {
     val theme by viewModel.theme.collectAsState(initial = "light")
     val textSize by viewModel.textSize.collectAsState(initial = 1f)
@@ -39,38 +40,43 @@ fun SettingsScreen(
         topBar = {
             SimpleTopAppBar(
                 detailName = "Settings",
-                onBackClick = onBackClick
+                onBackClick = onBackClick,
             )
         },
     ) { paddingValues ->
         Column(
-            modifier = Modifier
-                .padding(paddingValues)
-                .padding(horizontal = 16.dp)
+            modifier =
+                Modifier
+                    .padding(paddingValues)
+                    .padding(horizontal = 16.dp),
         ) {
-
             Text(
                 text = "Choose theme",
                 style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
+                modifier = Modifier.padding(top = 16.dp, bottom = 8.dp),
             )
 
             themes.forEach { themeOption ->
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { viewModel.saveTheme(themeOption) }
-                        .padding(vertical = 8.dp)
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .clickable { viewModel.saveTheme(themeOption) }
+                            .padding(vertical = 8.dp),
                 ) {
                     RadioButton(
                         selected = theme == themeOption,
-                        onClick = { viewModel.saveTheme(themeOption) }
+                        onClick = { viewModel.saveTheme(themeOption) },
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = themeOption.capitalize(),
-                        style = MaterialTheme.typography.bodyLarge
+                        text = themeOption.replaceFirstChar {
+                            if (it.isLowerCase()) it.titlecase(
+                                Locale.getDefault()
+                            ) else it.toString()
+                        },
+                        style = MaterialTheme.typography.bodyLarge,
                     )
                 }
             }
@@ -80,14 +86,14 @@ fun SettingsScreen(
             Text(
                 text = "Text Size: ${"%.1f".format(textSize)}",
                 style = MaterialTheme.typography.titleMedium,
-                modifier = Modifier.padding(bottom = 8.dp)
+                modifier = Modifier.padding(bottom = 8.dp),
             )
             Slider(
-                value = textSize.toFloat(),
+                value = textSize,
                 onValueChange = { viewModel.saveTextSize(it) },
                 valueRange = 1f..2f,
                 steps = 9,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
             )
 
             Spacer(modifier = Modifier.height(24.dp))

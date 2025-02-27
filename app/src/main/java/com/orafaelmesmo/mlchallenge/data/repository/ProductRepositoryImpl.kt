@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.Flow
 class ProductRepositoryImpl(
     private val apiService: ProductApi,
     private val resourceProvider: ResourceProvider,
-    private val appLogger: AppLogger
+    private val appLogger: AppLogger,
 ) : ProductRepository {
     override suspend fun searchProducts(query: String): Flow<PagingData<Product>> {
         return Pager(
@@ -39,25 +39,26 @@ class ProductRepositoryImpl(
                     Exception(
                         resourceProvider.getString(
                             R.string.error_getting_product_details,
-                            response.errorBody()?.string() ?: "Unknown error"
-                        )
-                    )
+                            response.errorBody()?.string() ?: "Unknown error",
+                        ),
+                    ),
                 )
             }
 
-            val productDetailsRemote = response.body() ?: return Result.failure(
-                Exception("Product not found")
-            )
+            val productDetailsRemote =
+                response.body() ?: return Result.failure(
+                    Exception("Product not found"),
+                )
 
             val description: String = getProductDescription(id)
             Result.success(
                 ProductDetailsMapper.toDomain(
                     productDetailsRemote,
-                    description
-                )
+                    description,
+                ),
             )
         } catch (e: Exception) {
-            appLogger.e("ProductDetails", "Error getting product details", e)
+            appLogger.error("ProductDetails", "Error getting product details", e)
             Result.failure(e)
         }
     }
@@ -69,7 +70,7 @@ class ProductRepositoryImpl(
                 val description = descriptions.body()
                 return DescriptionMapper.toDomain(description)
             } else {
-                appLogger.e(
+                appLogger.error(
                     "ProductDescription",
                     "Error getting product descriptions: ${
                         descriptions.errorBody()?.string()
@@ -78,7 +79,7 @@ class ProductRepositoryImpl(
                 return "No description provided"
             }
         } catch (e: Exception) {
-            appLogger.e("ProductDescription", "Error getting product descriptions", e)
+            appLogger.error("ProductDescription", "Error getting product descriptions", e)
             throw e
         }
     }

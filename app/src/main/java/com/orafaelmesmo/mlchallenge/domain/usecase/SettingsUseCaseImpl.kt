@@ -4,9 +4,8 @@ import com.orafaelmesmo.mlchallenge.domain.repository.SettingsRepository
 import kotlinx.coroutines.flow.Flow
 
 class SettingsUseCaseImpl(
-    private val repository: SettingsRepository
+    private val repository: SettingsRepository,
 ) : SettingsUseCase {
-
     override val theme: Flow<String> = repository.theme
     override val textSize: Flow<Float> = repository.textSize
 

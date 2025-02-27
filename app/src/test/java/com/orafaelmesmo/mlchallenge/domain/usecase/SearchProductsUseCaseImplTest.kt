@@ -21,12 +21,12 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class SearchProductsUseCaseImplTest {
-
     @MockK(relaxed = true)
     private lateinit var appLogger: AppLogger
 
     @MockK(relaxed = true)
     private lateinit var repository: ProductRepository
+
     @MockK(relaxed = true)
     private lateinit var apiService: ProductApi
 
@@ -43,10 +43,11 @@ class SearchProductsUseCaseImplTest {
         runTest {
             // Arrange
             val query = "iphone"
-            val expectedProducts = listOf(
-                Product("1", "iPhone 13", "https://example.com/iphone13.jpg", "R$ 5000"),
-                Product("2", "iPhone 14", "https://example.com/iphone14.jpg", "R$ 6000")
-            )
+            val expectedProducts =
+                listOf(
+                    Product("1", "iPhone 13", "https://example.com/iphone13.jpg", "R$ 5000"),
+                    Product("2", "iPhone 14", "https://example.com/iphone14.jpg", "R$ 6000"),
+                )
 
             val expectedPagingData = PagingData.from(expectedProducts)
 
@@ -61,19 +62,21 @@ class SearchProductsUseCaseImplTest {
         }
 
     @Test
-    fun `searchProducts should throw exception when API call fails`() = runBlocking {
-        // Arrange
-        val query = "iphone"
-        val exceptionMessage = "Expected at least one element"
-        coEvery { apiService.searchProducts(query, any(), any()) } throws RuntimeException(exceptionMessage)
+    fun `searchProducts should throw exception when API call fails`() =
+        runBlocking {
+            // Arrange
+            val query = "iphone"
+            val exceptionMessage = "Expected at least one element"
+            coEvery { apiService.searchProducts(query, any(), any()) } throws RuntimeException(exceptionMessage)
 
-        // Act & Assert
-        val exception = assertThrows(RuntimeException::class.java) {
-            runBlocking {
-                repository.searchProducts(query).first()
-            }
+            // Act & Assert
+            val exception =
+                assertThrows(RuntimeException::class.java) {
+                    runBlocking {
+                        repository.searchProducts(query).first()
+                    }
+                }
+
+            assertEquals(exceptionMessage, exception.message)
         }
-
-        assertEquals(exceptionMessage, exception.message)
-    }
 }

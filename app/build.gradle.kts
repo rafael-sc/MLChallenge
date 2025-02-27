@@ -84,5 +84,4 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.androidx.paging.common.ktx)
     testImplementation(libs.androidx.core.testing)
-
 }

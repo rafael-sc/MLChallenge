@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
             val theme by viewModel.theme.collectAsState(initial = "light")
             val textSize by viewModel.textSize.collectAsState(initial = 1f)
 
-            MLChallengeTheme(darkTheme = theme == "dark", textSize = textSize){
+            MLChallengeTheme(darkTheme = theme == "dark", textSize = textSize) {
                 AppNavHost()
             }
         }

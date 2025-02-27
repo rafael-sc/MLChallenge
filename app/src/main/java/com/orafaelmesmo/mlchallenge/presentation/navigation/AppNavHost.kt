@@ -28,20 +28,20 @@ fun AppNavHost() {
                     },
                     onSettingsClick = {
                         navController.navigate("settings_screen")
-                    }
+                    },
                 )
             }
         }
 
         composable(route = "settings_screen") {
-         Scaffold { innerPadding ->
-             SettingsScreen(
-                 modifier = Modifier.padding(innerPadding),
-                 onBackClick = {
-                     navController.popBackStack()
-                 }
-             )
-         }
+            Scaffold { innerPadding ->
+                SettingsScreen(
+                    modifier = Modifier.padding(innerPadding),
+                    onBackClick = {
+                        navController.popBackStack()
+                    },
+                )
+            }
         }
 
         composable(
@@ -52,7 +52,7 @@ fun AppNavHost() {
                 productId = productId,
                 onBackClick = {
                     navController.popBackStack()
-                }
+                },
             )
         }
     }

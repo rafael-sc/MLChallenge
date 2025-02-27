@@ -9,13 +9,13 @@ import kotlinx.coroutines.flow.catch
 
 class SearchProductsUseCaseImpl(
     private val repository: ProductRepository,
-    private val appLogger: AppLogger
+    private val appLogger: AppLogger,
 ) : SearchProductsUseCase {
     override suspend fun searchProducts(query: String): Flow<PagingData<Product>> {
         val result = repository.searchProducts(query)
         return result
             .catch { exception ->
-                appLogger.e("SearchProductsUseCase", "Erro ao buscar produtos", exception)
+                appLogger.error("SearchProductsUseCase", "Erro ao buscar produtos", exception)
                 emit(PagingData.empty())
             }
     }

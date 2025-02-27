@@ -67,9 +67,9 @@ fun SearchTopBar(
                 )
                 TextField(
                     modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
+                        Modifier
+                            .fillMaxWidth()
+                            .weight(1f),
                     value = textFieldValue,
                     onValueChange = { newValue ->
                         textFieldValue = newValue
@@ -79,13 +79,13 @@ fun SearchTopBar(
                     singleLine = true,
                     textStyle = MaterialTheme.typography.bodyLarge,
                     colors =
-                    TextFieldDefaults.colors(
-                        focusedContainerColor = Color.Transparent,
-                        unfocusedContainerColor = Color.Transparent,
-                        focusedIndicatorColor = Color.Transparent,
-                        unfocusedIndicatorColor = Color.Transparent,
-                        disabledIndicatorColor = Color.Transparent,
-                    ),
+                        TextFieldDefaults.colors(
+                            focusedContainerColor = Color.Transparent,
+                            unfocusedContainerColor = Color.Transparent,
+                            focusedIndicatorColor = Color.Transparent,
+                            unfocusedIndicatorColor = Color.Transparent,
+                            disabledIndicatorColor = Color.Transparent,
+                        ),
                     shape = RoundedCornerShape(100.dp),
                     trailingIcon = {
                         Row {
@@ -110,7 +110,7 @@ fun SearchTopBar(
                                 )
                             }
                         }
-                    }
+                    },
                 )
             }
         },

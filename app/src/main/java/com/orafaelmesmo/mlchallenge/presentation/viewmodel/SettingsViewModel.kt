@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class SettingsViewModel(
-    private val settingsUseCase: SettingsUseCase
+    private val settingsUseCase: SettingsUseCase,
 ) : ViewModel() {
     val theme: Flow<String> = settingsUseCase.theme
     val textSize: Flow<Float> = settingsUseCase.textSize

@@ -27,7 +27,6 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class SearchViewModelTest {
-
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -61,21 +60,21 @@ class SearchViewModelTest {
     }
 
     @Test
-    fun `searchProducts should update searchQuery when internet is available`() = runTest {
-        // Arrange
-        val query = "iphone"
-        coEvery { searchProductsUseCase.searchProducts(query) } returns flowOf(PagingData.empty())
+    fun `searchProducts should update searchQuery when internet is available`() =
+        runTest {
+            // Arrange
+            val query = "iphone"
+            coEvery { searchProductsUseCase.searchProducts(query) } returns flowOf(PagingData.empty())
 
+            // Act
+            viewModel.searchProducts(query)
+            advanceUntilIdle()
 
-        // Act
-        viewModel.searchProducts(query)
-        advanceUntilIdle()
-
-        // Assert
-        assertNotNull(viewModel.productsPagingData.first())
-        verify(exactly = 2) { networkCheckUseCase.isConnected() }
+            // Assert
+            assertNotNull(viewModel.productsPagingData.first())
+            verify(exactly = 2) { networkCheckUseCase.isConnected() }
 //        coVerify { searchProductsUseCase.searchProducts(query) }
-    }
+        }
 
     @Test
     fun `searchProducts should set error state when no internet connection`() {
@@ -91,22 +90,23 @@ class SearchViewModelTest {
     }
 
     @Test
-    fun `retrySearch should retry last query if internet is available`() = runTest {
-        // Arrange
-        val query = "iphone"
-        every { networkCheckUseCase.isConnected() } returns true
-        coEvery { searchProductsUseCase.searchProducts(query) } returns flowOf(PagingData.empty())
+    fun `retrySearch should retry last query if internet is available`() =
+        runTest {
+            // Arrange
+            val query = "iphone"
+            every { networkCheckUseCase.isConnected() } returns true
+            coEvery { searchProductsUseCase.searchProducts(query) } returns flowOf(PagingData.empty())
 
-        viewModel.searchProducts(query)
-        advanceUntilIdle()
+            viewModel.searchProducts(query)
+            advanceUntilIdle()
 
-        // Act
-        viewModel.retrySearch()
-        advanceUntilIdle()
+            // Act
+            viewModel.retrySearch()
+            advanceUntilIdle()
 
-        // Assert
-        assertTrue(viewModel.searchState.value is ScreenState.Idle)
-    }
+            // Assert
+            assertTrue(viewModel.searchState.value is ScreenState.Idle)
+        }
 
     @Test
     fun `retrySearch should set error state if no internet`() {

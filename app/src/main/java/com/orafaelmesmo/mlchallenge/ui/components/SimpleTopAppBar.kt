@@ -39,6 +39,6 @@ fun SimpleTopAppBar(
             IconButton(onClick = { onBackClick() }) {
                 Icon(imageVector = Icons.Filled.ArrowBack, contentDescription = "Back")
             }
-        }
+        },
     )
 }

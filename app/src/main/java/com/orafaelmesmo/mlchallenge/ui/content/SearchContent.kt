@@ -62,10 +62,11 @@ fun SearchContent(
         is ScreenState.Error -> {
             val errorMessage = (searchState as ScreenState.Error).message
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                contentAlignment = Alignment.Center
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues),
+                contentAlignment = Alignment.Center,
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
@@ -73,7 +74,7 @@ fun SearchContent(
                         color = Color.Red,
                         style = MaterialTheme.typography.bodyLarge,
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(16.dp)
+                        modifier = Modifier.padding(16.dp),
                     )
                     Button(onClick = { viewModel.retrySearch() }) {
                         Text(text = stringResource(R.string.retry))
@@ -84,10 +85,11 @@ fun SearchContent(
 
         is ScreenState.Loading -> {
             Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                contentAlignment = Alignment.Center
+                modifier =
+                    Modifier
+                        .fillMaxSize()
+                        .padding(paddingValues),
+                contentAlignment = Alignment.Center,
             ) {
                 CircularProgressIndicator()
             }
@@ -98,9 +100,9 @@ fun SearchContent(
                 LazyVerticalGrid(
                     columns = GridCells.Adaptive(180.dp),
                     modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
+                        Modifier
+                            .fillMaxSize()
+                            .padding(paddingValues),
                     contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
                     horizontalArrangement = Arrangement.spacedBy(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -115,9 +117,9 @@ fun SearchContent(
                                 productValue = it.price,
                                 imageUrl = it.thumbnail,
                                 modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .clickable { onProductClick(it.id) },
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .clickable { onProductClick(it.id) },
                             )
                         }
                     }
@@ -125,9 +127,9 @@ fun SearchContent(
             } else {
                 LazyColumn(
                     modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
+                        Modifier
+                            .fillMaxSize()
+                            .padding(paddingValues),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp),
                     state = lazyListState,
@@ -142,10 +144,10 @@ fun SearchContent(
                                 productValue = it.price,
                                 imageUrl = it.thumbnail,
                                 modifier =
-                                Modifier
-                                    .fillMaxWidth()
-                                    .padding(16.dp)
-                                    .clickable { onProductClick(it.id) },
+                                    Modifier
+                                        .fillMaxWidth()
+                                        .padding(16.dp)
+                                        .clickable { onProductClick(it.id) },
                             )
                         }
                     }
