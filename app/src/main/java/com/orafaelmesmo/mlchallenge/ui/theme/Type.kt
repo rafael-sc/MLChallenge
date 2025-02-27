@@ -29,7 +29,7 @@ fun rememberTypography(textSize: Float): Typography {
                 TextStyle(
                     fontFamily = FontFamily.SansSerif,
                     fontWeight = FontWeight.Normal,
-                    fontSize = newSize(20),
+                    fontSize = newSize(18),
                 ),
             headlineLarge =
                 TextStyle(

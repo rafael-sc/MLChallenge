@@ -23,4 +23,5 @@
     <string name="error_getting_product_details">Erro ao buscar os detalhes do produto: %1$s</string>
     <string name="error_no_internet_connection">No internet connection</string>
     <string name="retry">Tentar novamente</string>
+    <string name="product_link">Link do produto: %1$s</string>
 </resources>

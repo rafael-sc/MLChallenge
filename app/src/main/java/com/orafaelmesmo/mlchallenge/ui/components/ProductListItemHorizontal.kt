@@ -65,7 +65,7 @@ fun ProductListItemHorizontal(
                     Modifier
                         .padding(top = 4.dp),
                 text = productValue,
-                style = MaterialTheme.typography.displayMedium,
+                style = MaterialTheme.typography.displaySmall,
                 color = MaterialTheme.colorScheme.primary,
             )
         }
