@@ -6,7 +6,7 @@ import androidx.paging.PagingSource.LoadResult.Page
 import androidx.paging.PagingState
 import com.orafaelmesmo.mlchallenge.commom.AppLogger
 import com.orafaelmesmo.mlchallenge.data.mapper.ProductMapper
-import com.orafaelmesmo.mlchallenge.data.model.PagingResponse
+import com.orafaelmesmo.mlchallenge.data.model.Paging
 import com.orafaelmesmo.mlchallenge.data.model.ProductRemote
 import com.orafaelmesmo.mlchallenge.data.model.SearchResponse
 import com.orafaelmesmo.mlchallenge.data.remote.ProductApi
@@ -26,7 +26,7 @@ import org.junit.Before
 import org.junit.Test
 import retrofit2.Response
 
-class ProductPagingResponseSourceTest {
+class ProductPagingSourceTest {
 
     @MockK
     lateinit var productApi: ProductApi
@@ -48,8 +48,8 @@ class ProductPagingResponseSourceTest {
             ProductRemote("1", "Product 1", 10.0, "https://validurl.com/image1.jpg"),
             ProductRemote("2", "Product 2", 20.0, "https://validurl.com/image2.jpg"),
         )
-        val pagingResponse = PagingResponse(2, 2, 0, 2)
-        val mockResponse = SearchResponse(pagingResponse, mockProducts)
+        val paging = Paging(2, 2, 0, 2)
+        val mockResponse = SearchResponse(paging, mockProducts)
 
         coEvery { productApi.searchProducts(any(), any(), any()) } returns Response.success(
             mockResponse

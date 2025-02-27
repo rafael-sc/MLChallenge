@@ -1,4 +1,4 @@
-package com.orafaelmesmo.mlchallenge.data.repository
+package com.orafaelmesmo.mlchallenge.domain.repository
 
 import androidx.paging.PagingData
 import com.orafaelmesmo.mlchallenge.domain.model.Product

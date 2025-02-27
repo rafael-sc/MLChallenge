@@ -3,8 +3,8 @@ package com.orafaelmesmo.mlchallenge.domain.usecase
 import androidx.paging.PagingData
 import com.orafaelmesmo.mlchallenge.commom.AppLogger
 import com.orafaelmesmo.mlchallenge.data.remote.ProductApi
-import com.orafaelmesmo.mlchallenge.data.repository.ProductRepository
 import com.orafaelmesmo.mlchallenge.domain.model.Product
+import com.orafaelmesmo.mlchallenge.domain.repository.ProductRepository
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify

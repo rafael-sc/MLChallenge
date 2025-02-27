@@ -1,101 +1,109 @@
 package com.orafaelmesmo.mlchallenge.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-val Typography =
-    Typography(
-        displayLarge =
+
+@Composable
+fun rememberTypography(textSize: Float): Typography {
+    fun newSize(size: Int) = (size * textSize).sp
+    return remember(textSize) {
+        Typography(
+            displayLarge =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Light,
-                fontSize = 57.sp,
+                fontSize = newSize(35),
             ),
-        displayMedium =
+            displayMedium =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Normal,
-                fontSize = 45.sp,
+                fontSize = newSize(25),
             ),
-        displaySmall =
+            displaySmall =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Normal,
-                fontSize = 36.sp,
+                fontSize = newSize(20),
             ),
-        headlineLarge =
+            headlineLarge =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Normal,
-                fontSize = 32.sp,
+                fontSize = newSize(19),
             ),
-        headlineMedium =
+            headlineMedium =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Normal,
-                fontSize = 28.sp,
+                fontSize = newSize(16),
             ),
-        headlineSmall =
+            headlineSmall =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Medium,
-                fontSize = 24.sp,
+                fontSize = newSize(12),
             ),
-        titleLarge =
+            titleLarge =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Normal,
-                fontSize = 22.sp,
+                fontSize = newSize(19),
             ),
-        titleMedium =
+            titleMedium =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Medium,
-                fontSize = 16.sp,
+                fontSize = newSize(16),
             ),
-        titleSmall =
+            titleSmall =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Medium,
-                fontSize = 14.sp,
+                fontSize = newSize(12),
             ),
-        bodyLarge =
+            bodyLarge =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Normal,
-                fontSize = 16.sp,
+                fontSize = newSize(14),
             ),
-        bodyMedium =
+            bodyMedium =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Normal,
-                fontSize = 14.sp,
+                fontSize = newSize(12),
             ),
-        bodySmall =
+            bodySmall =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Normal,
-                fontSize = 12.sp,
+                fontSize = newSize(10),
             ),
-        labelLarge =
+            labelLarge =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Medium,
-                fontSize = 14.sp,
+                fontSize = newSize(7),
             ),
-        labelMedium =
+            labelMedium =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Medium,
-                fontSize = 12.sp,
+                fontSize = newSize(6),
             ),
-        labelSmall =
+            labelSmall =
             TextStyle(
                 fontFamily = FontFamily.SansSerif,
                 fontWeight = FontWeight.Medium,
-                fontSize = 11.sp,
+                fontSize = newSize(5),
             ),
-    )
+        )
+    }
+}

@@ -11,6 +11,7 @@ import com.orafaelmesmo.mlchallenge.data.mapper.ProductDetailsMapper
 import com.orafaelmesmo.mlchallenge.data.remote.ProductApi
 import com.orafaelmesmo.mlchallenge.domain.model.Product
 import com.orafaelmesmo.mlchallenge.domain.model.ProductDetail
+import com.orafaelmesmo.mlchallenge.domain.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
 
 class ProductRepositoryImpl(

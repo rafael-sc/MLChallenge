@@ -4,27 +4,22 @@ package com.orafaelmesmo.mlchallenge.presentation.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.orafaelmesmo.mlchallenge.R
 import com.orafaelmesmo.mlchallenge.presentation.ScreenState
 import com.orafaelmesmo.mlchallenge.presentation.viewmodel.DetailsViewModel
+import com.orafaelmesmo.mlchallenge.ui.components.SimpleTopAppBar
 import com.orafaelmesmo.mlchallenge.ui.content.ProductDetailContent
 import org.koin.androidx.compose.koinViewModel
 
@@ -32,6 +27,7 @@ import org.koin.androidx.compose.koinViewModel
 @Suppress("FunctionName")
 fun ProductDetailScreen(
     modifier: Modifier = Modifier,
+    onBackClick: () -> Unit,
     viewModel: DetailsViewModel = koinViewModel(),
     productId: String,
 ) {
@@ -62,18 +58,9 @@ fun ProductDetailScreen(
                 Scaffold(
                     modifier = modifier,
                     topBar = {
-                        TopAppBar(
-                            modifier = Modifier.heightIn(min = 56.dp, max = Dp.Unspecified),
-                            title = {
-                                Text(
-                                    modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 16.dp),
-                                    textAlign = TextAlign.Start,
-                                    text = detail.name,
-                                    maxLines = 3,
-                                    overflow = TextOverflow.Visible,
-                                    style = MaterialTheme.typography.headlineSmall,
-                                )
-                            },
+                        SimpleTopAppBar(
+                            detailName = detail.name,
+                            onBackClick
                         )
                     },
                 ) { paddingValues ->

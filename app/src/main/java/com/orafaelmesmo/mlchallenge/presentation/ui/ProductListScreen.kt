@@ -8,7 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import com.orafaelmesmo.mlchallenge.presentation.viewmodel.SearchViewModel
-import com.orafaelmesmo.mlchallenge.ui.components.AppTopBar
+import com.orafaelmesmo.mlchallenge.ui.components.SearchTopBar
 import com.orafaelmesmo.mlchallenge.ui.content.SearchContent
 import org.koin.androidx.compose.koinViewModel
 
@@ -18,6 +18,7 @@ import org.koin.androidx.compose.koinViewModel
 fun ProductListScreen(
     modifier: Modifier = Modifier,
     onProductClick: (String) -> Unit,
+    onSettingsClick: () -> Unit,
     viewModel: SearchViewModel = koinViewModel(),
 ) {
     val scrollBehavior =
@@ -27,8 +28,9 @@ fun ProductListScreen(
     Scaffold(
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            AppTopBar(
+            SearchTopBar(
                 scrollBehavior = scrollBehavior,
+                onSettingsClick = { onSettingsClick() },
             ) {
                 viewModel.searchProducts(it)
             }

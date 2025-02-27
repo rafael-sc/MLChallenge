@@ -3,7 +3,7 @@ package com.orafaelmesmo.mlchallenge.data.repository
 import com.orafaelmesmo.mlchallenge.commom.AppLogger
 import com.orafaelmesmo.mlchallenge.commom.ResourceProvider
 import com.orafaelmesmo.mlchallenge.data.model.AttributeResponse
-import com.orafaelmesmo.mlchallenge.data.model.PagingResponse
+import com.orafaelmesmo.mlchallenge.data.model.Paging
 import com.orafaelmesmo.mlchallenge.data.model.PictureResponse
 import com.orafaelmesmo.mlchallenge.data.model.ProductDescriptionResponse
 import com.orafaelmesmo.mlchallenge.data.model.ProductDetailsResponse
@@ -78,7 +78,7 @@ class ProductRepositoryImplTest {
         // Arrange
         val query = "iphone"
         val searchResponse = SearchResponse(
-            pagingResponse = PagingResponse(100, 50, 0, 50),
+            paging = Paging(100, 50, 0, 50),
             results = listOf(ProductRemote("1", "iPhone 12", 5000.0, "thumbnail"))
         )
         coEvery { apiService.searchProducts(query, any(), any()) } returns Response.success(

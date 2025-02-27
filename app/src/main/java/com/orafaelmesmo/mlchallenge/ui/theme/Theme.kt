@@ -43,6 +43,7 @@ private val DarkColorScheme =
 fun MLChallengeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
+    textSize: Float,
     content: @Composable () -> Unit,
 ) {
     val colorScheme =
@@ -58,7 +59,7 @@ fun MLChallengeTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = rememberTypography(textSize),
         content = content,
     )
 }

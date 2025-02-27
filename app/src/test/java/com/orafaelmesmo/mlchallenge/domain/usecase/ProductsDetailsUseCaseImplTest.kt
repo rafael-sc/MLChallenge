@@ -1,7 +1,7 @@
 package com.orafaelmesmo.mlchallenge.domain.usecase
 
-import com.orafaelmesmo.mlchallenge.data.repository.ProductRepository
 import com.orafaelmesmo.mlchallenge.domain.model.ProductDetail
+import com.orafaelmesmo.mlchallenge.domain.repository.ProductRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher

@@ -4,6 +4,6 @@ import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class SearchResponse(
-    val pagingResponse: PagingResponse,
+    val paging: Paging,
     val results: List<ProductRemote>,
 )

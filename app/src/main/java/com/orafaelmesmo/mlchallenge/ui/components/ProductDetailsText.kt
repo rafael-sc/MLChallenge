@@ -54,7 +54,7 @@ fun ProductDetailsText(product: ProductDetail) {
     SelectionContainer {
         Text(
             text = product.descriptions,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.bodyLarge,
         )
     }
     Spacer(modifier = Modifier.height(8.dp))

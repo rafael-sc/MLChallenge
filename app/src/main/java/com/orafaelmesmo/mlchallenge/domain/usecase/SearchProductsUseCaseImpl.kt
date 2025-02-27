@@ -2,8 +2,8 @@ package com.orafaelmesmo.mlchallenge.domain.usecase
 
 import androidx.paging.PagingData
 import com.orafaelmesmo.mlchallenge.commom.AppLogger
-import com.orafaelmesmo.mlchallenge.data.repository.ProductRepository
 import com.orafaelmesmo.mlchallenge.domain.model.Product
+import com.orafaelmesmo.mlchallenge.domain.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 
