@@ -4,8 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.orafaelmesmo.mlchallenge.R
+import com.orafaelmesmo.mlchallenge.commom.ResourceProvider
 import com.orafaelmesmo.mlchallenge.domain.model.Product
+import com.orafaelmesmo.mlchallenge.domain.usecase.NetworkCheckUseCase
 import com.orafaelmesmo.mlchallenge.domain.usecase.SearchProductsUseCase
+import com.orafaelmesmo.mlchallenge.presentation.ScreenState
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,11 +23,21 @@ import kotlinx.coroutines.flow.stateIn
 
 class SearchViewModel(
     private val searchProductsUseCase: SearchProductsUseCase,
+    private val networkCheckUseCase: NetworkCheckUseCase,
+    private val resourceProvider: ResourceProvider
 ) : ViewModel() {
-    private val searchState = MutableStateFlow<ScreenState>(ScreenState.Idle)
 
     private val searchQuery = MutableStateFlow("")
     private var lastQuery: String = ""
+
+    private val _searchState = MutableStateFlow<ScreenState>(ScreenState.Idle)
+    val searchState: StateFlow<ScreenState> = _searchState
+
+    init {
+        if (!networkCheckUseCase.isConnected()) {
+            emitErrorState()
+        }
+    }
 
     @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
     val productsPagingData: StateFlow<PagingData<Product>> =
@@ -41,11 +55,30 @@ class SearchViewModel(
             }
             .stateIn(
                 scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(5000),
+                started = SharingStarted.WhileSubscribed(Long.MAX_VALUE),
                 initialValue = PagingData.empty(),
             )
 
     fun searchProducts(query: String) {
+        if (!networkCheckUseCase.isConnected()) {
+            emitErrorState()
+            return
+        }
         searchQuery.value = query
     }
+
+    private fun emitErrorState() {
+        _searchState.value =
+            ScreenState.Error(resourceProvider.getString(R.string.error_no_internet_connection))
+    }
+
+    fun retrySearch() {
+        _searchState.value = ScreenState.Idle
+        if (!networkCheckUseCase.isConnected()) {
+            emitErrorState()
+            return
+        }
+        searchQuery.value = lastQuery
+    }
+
 }

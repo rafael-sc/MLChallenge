@@ -34,7 +34,9 @@ fun AppNavHost() {
             route = "product_detail/{productId}",
         ) { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId") ?: ""
-            ProductDetailScreen(productID = productId)
+            ProductDetailScreen(
+                productId = productId,
+            )
         }
     }
 }
