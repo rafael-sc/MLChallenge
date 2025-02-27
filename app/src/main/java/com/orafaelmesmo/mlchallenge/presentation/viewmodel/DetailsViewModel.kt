@@ -15,9 +15,8 @@ import kotlinx.coroutines.launch
 class DetailsViewModel(
     private val productsDetailsUseCase: ProductsDetailsUseCase,
     private val networkCheckUseCase: NetworkCheckUseCase,
-    private val resourceProvider: ResourceProvider
+    private val resourceProvider: ResourceProvider,
 ) : ViewModel() {
-
     private val _searchState = MutableStateFlow<ScreenState>(ScreenState.Idle)
     val searchState: StateFlow<ScreenState> = _searchState
 

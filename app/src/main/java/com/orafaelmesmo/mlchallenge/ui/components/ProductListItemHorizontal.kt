@@ -55,7 +55,7 @@ fun ProductListItemHorizontal(
                     Modifier
                         .padding(top = 8.dp),
                 text = productName,
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.titleSmall,
                 maxLines = 3,
                 overflow = TextOverflow.Ellipsis,
             )
@@ -65,7 +65,7 @@ fun ProductListItemHorizontal(
                     Modifier
                         .padding(top = 4.dp),
                 text = productValue,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.displayMedium,
                 color = MaterialTheme.colorScheme.primary,
             )
         }

@@ -21,7 +21,6 @@ import org.junit.Test
 
 @ExperimentalCoroutinesApi
 class DetailsViewModelTest {
-
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -73,7 +72,7 @@ class DetailsViewModelTest {
         // Assert
         assertEquals(
             ScreenState.Error("No Internet Connection"),
-            viewModel.searchState.value
+            viewModel.searchState.value,
         )
         verify { networkCheckUseCase.isConnected() }
     }

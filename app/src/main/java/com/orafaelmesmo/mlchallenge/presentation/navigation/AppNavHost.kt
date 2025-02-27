@@ -9,12 +9,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.orafaelmesmo.mlchallenge.presentation.ui.ProductDetailScreen
 import com.orafaelmesmo.mlchallenge.presentation.ui.ProductListScreen
+import com.orafaelmesmo.mlchallenge.presentation.ui.SettingsScreen
 
 @Composable
 @Suppress("FunctionName")
 fun AppNavHost() {
     val navController = rememberNavController()
-
     NavHost(
         navController = navController,
         startDestination = "product_list",
@@ -26,6 +26,20 @@ fun AppNavHost() {
                     onProductClick = { productId ->
                         navController.navigate("product_detail/$productId")
                     },
+                    onSettingsClick = {
+                        navController.navigate("settings_screen")
+                    },
+                )
+            }
+        }
+
+        composable(route = "settings_screen") {
+            Scaffold { innerPadding ->
+                SettingsScreen(
+                    modifier = Modifier.padding(innerPadding),
+                    onBackClick = {
+                        navController.popBackStack()
+                    },
                 )
             }
         }
@@ -36,6 +50,9 @@ fun AppNavHost() {
             val productId = backStackEntry.arguments?.getString("productId") ?: ""
             ProductDetailScreen(
                 productId = productId,
+                onBackClick = {
+                    navController.popBackStack()
+                },
             )
         }
     }

@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.androidx.paging.common.android)
     implementation(libs.androidx.paging.compose)
+    implementation(libs.androidx.datastore.preferences)
 
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
@@ -77,9 +78,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    testImplementation (libs.androidx.core)
-    testImplementation (libs.mockito.core)
-    testImplementation (libs.mockito.kotlin)
+    testImplementation(libs.androidx.core)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.androidx.paging.common.ktx)
     testImplementation(libs.androidx.core.testing)

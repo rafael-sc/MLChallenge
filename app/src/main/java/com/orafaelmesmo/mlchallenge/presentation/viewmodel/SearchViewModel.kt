@@ -24,9 +24,8 @@ import kotlinx.coroutines.flow.stateIn
 class SearchViewModel(
     private val searchProductsUseCase: SearchProductsUseCase,
     private val networkCheckUseCase: NetworkCheckUseCase,
-    private val resourceProvider: ResourceProvider
+    private val resourceProvider: ResourceProvider,
 ) : ViewModel() {
-
     private val searchQuery = MutableStateFlow("")
     private var lastQuery: String = ""
 
@@ -80,5 +79,4 @@ class SearchViewModel(
         }
         searchQuery.value = lastQuery
     }
-
 }

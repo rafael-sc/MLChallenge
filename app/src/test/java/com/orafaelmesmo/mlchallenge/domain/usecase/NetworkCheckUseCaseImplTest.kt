@@ -10,7 +10,6 @@ import org.junit.Before
 import org.junit.Test
 
 class NetworkCheckUseCaseImplTest {
-
     private lateinit var useCase: NetworkCheckUseCase
 
     private val networkUtils: NetworkUtils = mockk(relaxed = true)
@@ -45,5 +44,3 @@ class NetworkCheckUseCaseImplTest {
         verify(exactly = 1) { networkUtils.isConnected() }
     }
 }
-
-

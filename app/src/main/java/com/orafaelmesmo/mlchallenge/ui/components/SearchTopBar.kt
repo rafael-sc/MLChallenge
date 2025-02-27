@@ -9,6 +9,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -33,9 +34,10 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @Suppress("FunctionName")
-fun AppTopBar(
+fun SearchTopBar(
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior,
+    onSettingsClick: () -> Unit = {},
     onTextFieldValueChange: (String) -> Unit = {},
 ) {
     var textFieldValue by rememberSaveable { mutableStateOf("") }
@@ -75,6 +77,7 @@ fun AppTopBar(
                     },
                     label = { Text("Search product") },
                     singleLine = true,
+                    textStyle = MaterialTheme.typography.bodyLarge,
                     colors =
                         TextFieldDefaults.colors(
                             focusedContainerColor = Color.Transparent,
@@ -85,13 +88,24 @@ fun AppTopBar(
                         ),
                     shape = RoundedCornerShape(100.dp),
                     trailingIcon = {
-                        if (textFieldValue.isNotEmpty()) {
+                        Row {
+                            if (textFieldValue.isNotEmpty()) {
+                                IconButton(
+                                    onClick = { textFieldValue = "" },
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Close,
+                                        contentDescription = "Clear",
+                                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    )
+                                }
+                            }
                             IconButton(
-                                onClick = { textFieldValue = "" },
+                                onClick = { onSettingsClick() },
                             ) {
                                 Icon(
-                                    imageVector = Icons.Default.Close,
-                                    contentDescription = "Clear",
+                                    imageVector = Icons.Default.Settings,
+                                    contentDescription = "Settings",
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
                             }

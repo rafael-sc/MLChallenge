@@ -60,12 +60,12 @@ fun ProductListItemVertical(
             ) {
                 Text(
                     text = productName,
-                    style = MaterialTheme.typography.titleMedium,
+                    style = MaterialTheme.typography.titleSmall,
                 )
                 Text(
                     modifier = Modifier.padding(top = 4.dp),
                     text = productValue,
-                    style = MaterialTheme.typography.bodyMedium,
+                    style = MaterialTheme.typography.displayMedium,
                 )
             }
         }

@@ -5,8 +5,10 @@ import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 
 class ResourceProvider(private val context: Context) {
-
-    fun getString(resId: Int, vararg formatArgs: Any): String {
+    fun getString(
+        resId: Int,
+        vararg formatArgs: Any,
+    ): String {
         return context.getString(resId, *formatArgs)
     }
 
