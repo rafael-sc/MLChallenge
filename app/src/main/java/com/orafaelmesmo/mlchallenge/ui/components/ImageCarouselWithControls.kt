@@ -20,7 +20,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.orafaelmesmo.mlchallenge.R
 
 @Composable
 @Suppress("FunctionName")
@@ -49,7 +51,7 @@ fun ImageCarouselWithControls(
                         .clickable { onImageClick(page) },
                 imageUrl = images[page],
                 showPlaceholder = false,
-                contentDescription = "Imagem ${page + 1} do produto",
+                contentDescription = stringResource(R.string.carrousel_image_description, page + 1),
             )
         }
 
@@ -71,7 +73,7 @@ fun ImageCarouselWithControls(
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Default.ArrowBack,
-                    contentDescription = "Imagem anterior",
+                    contentDescription = stringResource(R.string.previous_image),
                     tint = Color.White,
                 )
             }
@@ -84,7 +86,7 @@ fun ImageCarouselWithControls(
             ) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Default.ArrowForward,
-                    contentDescription = "Próxima imagem",
+                    contentDescription = stringResource(R.string.next_image),
                     tint = Color.White,
                 )
             }

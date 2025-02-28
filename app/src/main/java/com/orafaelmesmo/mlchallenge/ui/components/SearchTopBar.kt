@@ -29,7 +29,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.orafaelmesmo.mlchallenge.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -44,14 +46,14 @@ fun SearchTopBar(
 
     TopAppBar(
         modifier =
-            modifier
-                .padding(horizontal = 16.dp)
-                .clip(RoundedCornerShape(100.dp)),
+        modifier
+            .padding(horizontal = 16.dp)
+            .clip(RoundedCornerShape(100.dp)),
         scrollBehavior = scrollBehavior,
         colors =
-            TopAppBarDefaults.topAppBarColors(
-                containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.9f),
-            ),
+        TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.9f),
+        ),
         windowInsets = WindowInsets(top = 0.dp),
         title = {
             Row(
@@ -67,25 +69,25 @@ fun SearchTopBar(
                 )
                 TextField(
                     modifier =
-                        Modifier
-                            .fillMaxWidth()
-                            .weight(1f),
+                    Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
                     value = textFieldValue,
                     onValueChange = { newValue ->
                         textFieldValue = newValue
                         onTextFieldValueChange(newValue)
                     },
-                    label = { Text("Search product") },
+                    label = { Text(stringResource(R.string.search_product)) },
                     singleLine = true,
                     textStyle = MaterialTheme.typography.bodyLarge,
                     colors =
-                        TextFieldDefaults.colors(
-                            focusedContainerColor = Color.Transparent,
-                            unfocusedContainerColor = Color.Transparent,
-                            focusedIndicatorColor = Color.Transparent,
-                            unfocusedIndicatorColor = Color.Transparent,
-                            disabledIndicatorColor = Color.Transparent,
-                        ),
+                    TextFieldDefaults.colors(
+                        focusedContainerColor = Color.Transparent,
+                        unfocusedContainerColor = Color.Transparent,
+                        focusedIndicatorColor = Color.Transparent,
+                        unfocusedIndicatorColor = Color.Transparent,
+                        disabledIndicatorColor = Color.Transparent,
+                    ),
                     shape = RoundedCornerShape(100.dp),
                     trailingIcon = {
                         Row {
@@ -95,7 +97,7 @@ fun SearchTopBar(
                                 ) {
                                     Icon(
                                         imageVector = Icons.Default.Close,
-                                        contentDescription = "Clear",
+                                        contentDescription = stringResource(R.string.clear_search),
                                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                     )
                                 }
@@ -105,7 +107,7 @@ fun SearchTopBar(
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Settings,
-                                    contentDescription = "Settings",
+                                    contentDescription = stringResource(R.string.settings),
                                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                                 )
                             }

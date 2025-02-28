@@ -23,8 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.orafaelmesmo.mlchallenge.R
 import kotlinx.coroutines.launch
 
 @Composable
@@ -58,7 +60,7 @@ fun FullScreenImageDialog(
                             .fillMaxSize()
                             .clickable { onDismiss() },
                     imageUrl = images[page],
-                    contentDescription = "Imagem em tela cheia",
+                    contentDescription = stringResource(R.string.full_screen_image),
                     contentScale = ContentScale.Fit,
                 )
             }
@@ -71,7 +73,7 @@ fun FullScreenImageDialog(
             ) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = "Fechar visualização",
+                    contentDescription = stringResource(R.string.close_details),
                     tint = Color.White,
                 )
             }
@@ -87,7 +89,7 @@ fun FullScreenImageDialog(
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Previous",
+                        contentDescription = stringResource(R.string.previous_image),
                         tint = Color.White,
                     )
                 }
@@ -104,7 +106,7 @@ fun FullScreenImageDialog(
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowForward,
-                        contentDescription = "Next",
+                        contentDescription = stringResource(R.string.next_image),
                         tint = Color.White,
                     )
                 }

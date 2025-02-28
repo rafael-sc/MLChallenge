@@ -10,7 +10,7 @@
     <!-- Strings de busca -->
     <string name="search">Buscar</string>
     <string name="search_product">Buscar produto</string>
-    <string name="clear">Limpar</string>
+    <string name="clear_search">Limpar busca</string>
 
     <!-- Produto -->
     <string name="product_name">Nome do Produto</string>
@@ -23,6 +23,15 @@
     <string name="error_getting_product_details">Erro ao buscar os detalhes do produto: %1$s</string>
     <string name="error_no_internet_connection">No internet connection</string>
     <string name="retry">Tentar novamente</string>
+    <string name="product_image">Imagem do produto: %1$s</string>
     <string name="product_link">Link do produto: %1$s</string>
     <string name="no_items_found">Nenhum resultado encontrado</string>
+    <string name="back">Voltar</string>
+    <string name="settings">Configurações</string>
+    <string name="carrousel_image_description">Imagem %1$s do produto</string>
+    <string name="previous_image">Imagem anterior</string>
+    <string name="next_image">Próxima imagem</string>
+    <string name="full_screen_image">Imagem em tela cheia</string>
+    <string name="close_details">Fechar visualização</string>
+    <string name="text_size">Tamanho do texto %1$s</string>
 </resources>

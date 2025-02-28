@@ -18,7 +18,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.orafaelmesmo.mlchallenge.R
 import com.orafaelmesmo.mlchallenge.presentation.viewmodel.SettingsViewModel
 import com.orafaelmesmo.mlchallenge.ui.components.SimpleTopAppBar
 import java.util.Locale
@@ -84,7 +86,7 @@ fun SettingsScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "Text Size: ${"%.1f".format(textSize)}",
+                text = stringResource(R.string.text_size, "%.1f".format(textSize)),
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.padding(bottom = 8.dp),
             )
