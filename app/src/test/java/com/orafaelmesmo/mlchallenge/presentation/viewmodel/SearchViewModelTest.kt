@@ -73,7 +73,6 @@ class SearchViewModelTest {
             // Assert
             assertNotNull(viewModel.productsPagingData.first())
             verify(exactly = 2) { networkCheckUseCase.isConnected() }
-//        coVerify { searchProductsUseCase.searchProducts(query) }
         }
 
     @Test

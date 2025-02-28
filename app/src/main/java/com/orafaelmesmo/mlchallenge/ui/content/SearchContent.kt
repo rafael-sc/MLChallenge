@@ -35,6 +35,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.orafaelmesmo.mlchallenge.R
 import com.orafaelmesmo.mlchallenge.presentation.ScreenState
 import com.orafaelmesmo.mlchallenge.presentation.viewmodel.SearchViewModel
+import com.orafaelmesmo.mlchallenge.ui.components.EmptyState
 import com.orafaelmesmo.mlchallenge.ui.components.ProductListItemHorizontal
 import com.orafaelmesmo.mlchallenge.ui.components.ProductListItemVertical
 
@@ -63,9 +64,9 @@ fun SearchContent(
             val errorMessage = (searchState as ScreenState.Error).message
             Box(
                 modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
                 contentAlignment = Alignment.Center,
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -86,69 +87,77 @@ fun SearchContent(
         is ScreenState.Loading -> {
             Box(
                 modifier =
-                    Modifier
-                        .fillMaxSize()
-                        .padding(paddingValues),
+                Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
                 contentAlignment = Alignment.Center,
             ) {
                 CircularProgressIndicator()
             }
         }
 
+
         else -> {
-            if (isLandscape) {
-                LazyVerticalGrid(
-                    columns = GridCells.Adaptive(180.dp),
-                    modifier =
+            if (productsPagingItems.itemCount == 0 && viewModel.lastQuery.isNotEmpty()) {
+                EmptyState(
+                    message = stringResource(R.string.no_items_found),
+                    modifier = Modifier.fillMaxSize(),
+                )
+            } else {
+                if (isLandscape) {
+                    LazyVerticalGrid(
+                        columns = GridCells.Adaptive(180.dp),
+                        modifier =
                         Modifier
                             .fillMaxSize()
                             .padding(paddingValues),
-                    contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
-                    horizontalArrangement = Arrangement.spacedBy(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp),
-                ) {
-                    itemsIndexed(
-                        items = List(productsPagingItems.itemCount) { index -> productsPagingItems[index] },
-                        key = { index, product -> product?.id ?: index },
-                    ) { _, product ->
-                        product?.let {
-                            ProductListItemHorizontal(
-                                productName = it.name,
-                                productValue = it.price,
-                                imageUrl = it.thumbnail,
-                                modifier =
+                        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
+                        horizontalArrangement = Arrangement.spacedBy(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp),
+                    ) {
+                        itemsIndexed(
+                            items = List(productsPagingItems.itemCount) { index -> productsPagingItems[index] },
+                            key = { index, product -> product?.id ?: index },
+                        ) { _, product ->
+                            product?.let {
+                                ProductListItemHorizontal(
+                                    productName = it.name,
+                                    productValue = it.price,
+                                    imageUrl = it.thumbnail,
+                                    modifier =
                                     Modifier
                                         .fillMaxWidth()
                                         .clickable { onProductClick(it.id) },
-                            )
+                                )
+                            }
                         }
                     }
-                }
-            } else {
-                LazyColumn(
-                    modifier =
+                } else {
+                    LazyColumn(
+                        modifier =
                         Modifier
                             .fillMaxSize()
                             .padding(paddingValues),
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp),
-                    state = lazyListState,
-                ) {
-                    itemsIndexed(
-                        items = List(productsPagingItems.itemCount) { index -> productsPagingItems[index] },
-                        key = { index, product -> product?.id ?: index },
-                    ) { _, product ->
-                        product?.let {
-                            ProductListItemVertical(
-                                productName = it.name,
-                                productValue = it.price,
-                                imageUrl = it.thumbnail,
-                                modifier =
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        contentPadding = PaddingValues(top = 16.dp, bottom = 16.dp),
+                        state = lazyListState,
+                    ) {
+                        itemsIndexed(
+                            items = List(productsPagingItems.itemCount) { index -> productsPagingItems[index] },
+                            key = { index, product -> product?.id ?: index },
+                        ) { _, product ->
+                            product?.let {
+                                ProductListItemVertical(
+                                    productName = it.name,
+                                    productValue = it.price,
+                                    imageUrl = it.thumbnail,
+                                    modifier =
                                     Modifier
                                         .fillMaxWidth()
                                         .padding(16.dp)
                                         .clickable { onProductClick(it.id) },
-                            )
+                                )
+                            }
                         }
                     }
                 }

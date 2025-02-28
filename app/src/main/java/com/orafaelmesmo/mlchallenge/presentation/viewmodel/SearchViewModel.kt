@@ -27,7 +27,7 @@ class SearchViewModel(
     private val resourceProvider: ResourceProvider,
 ) : ViewModel() {
     private val searchQuery = MutableStateFlow("")
-    private var lastQuery: String = ""
+    var lastQuery: String = ""
 
     private val _searchState = MutableStateFlow<ScreenState>(ScreenState.Idle)
     val searchState: StateFlow<ScreenState> = _searchState
