@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.MaterialTheme
@@ -24,7 +25,17 @@ import com.orafaelmesmo.mlchallenge.domain.model.ProductDetail
 @Composable
 @Suppress("FunctionName")
 fun ProductDetailsText(product: ProductDetail) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+
+    Text(
+        modifier = Modifier.padding(start = 8.dp, end = 8.dp, top =16.dp, bottom = 16.dp),
+        text = product.name,
+        style = MaterialTheme.typography.headlineMedium,
+        overflow = TextOverflow.Visible,
+    )
+
+    Row(
+        modifier = Modifier.padding(start = 8.dp, end = 8.dp, top = 8.dp, bottom = 8.dp),
+        verticalAlignment = Alignment.CenterVertically) {
         Text(
             text = product.price,
             style = MaterialTheme.typography.titleLarge,
